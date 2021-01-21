@@ -4,7 +4,7 @@
 ///               Departamento de Computação e Tecnologia                   ///
 ///                  Disciplina DCT1106 -- Programação                      ///
 ///               Projeto Sistema de Controle de Biblioteca                 ///
-///                Developed by  @brenolves - Jan, 2021                     ///
+///                Desenvolvido por @brenolves | 01/2021                    ///
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
@@ -27,7 +27,7 @@ void menuPrincipal(void) {
     printf("|||               Departamento de Computação e Tecnologia                   |||\n");
     printf("|||                  Disciplina DCT1106 -- Programação                      |||\n");
     printf("|||              Projeto Sistema de Controle de Biblioteca                  |||\n");
-    printf("|||               Developed by  @brenolves - Jan, 2021                      |||\n");
+    printf("|||               Desenvolvido por @brenolves | 01/2021                     |||\n");
     printf("|||                                                                         |||\n");
     printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
     printf("|||                                                                         |||\n");
