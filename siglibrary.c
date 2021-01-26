@@ -144,8 +144,8 @@ void menuEmprestimos(void) {
         printf("|||                                                                         |||\n");
         printf("|||                    |#| 1 - Efetuar um empréstimo                        |||\n");
         printf("|||                    |#| 2 - Pesquisar um empréstimo                      |||\n");
-        printf("|||                    |#| 3 - Atualizar cadastro de um usuario             |||\n");
-        printf("|||                    |#| 4 - Excluir cadastro de um usuario               |||\n");
+        printf("|||                    |#| 3 - Atualizar dados de um empréstimo             |||\n");
+        printf("|||                    |#| 4 - Finalizar um empréstimo                      |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
