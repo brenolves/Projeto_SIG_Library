@@ -23,7 +23,7 @@ int main(void) {
 void clearscr(void) {
 
 #ifdef _WIN32
-    clearscr();
+    system("cls");
 #elif defined(unix) || defined(__unix__) || defined(__unix) || (defined(__APPLE__) && defined(__MACH__))
     system("clear");
 #else
