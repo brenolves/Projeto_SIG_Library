@@ -1,17 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//  Assinatura de funções.
+////  Assinatura de funções.
 
+// Menú Principal e Tela Sobre.
 void menuPrincipal(void);
 void menuAbout(void);
+// Módulo Livros.
 void menuLivros(void);
 void cadastroLivros(void);
 void pesquisaLivros(void);
 void atualizaLivros(void);
 void excluirLivros(void);
+// Módulo Usuários
 void menuUsuarios(void);
+void cadastroUsuarios(void);
+void pesquisaUsuarios(void);
+void atualizaUsuarios(void);
+void excluirUsuarios(void);
+// Módulo Empréstimos
 void menuEmprestimos(void);
+
+
 void clearscr(void);
 
 // Função principal.
@@ -63,7 +73,7 @@ void menuPrincipal(void) {
         printf("|||        5 - Sobre o programa         |:|          0 - Encerrar           |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte qualquer tecla para continuar...\n");
+        printf("||| Aperte ENTER para continuar...\n");
         getchar();
 }
 
@@ -84,7 +94,7 @@ void menuAbout(void) {
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte qualquer tecla para continuar...\n");
+        printf("||| Aperte ENTER para continuar...\n");
         getchar();
 
 }
@@ -111,7 +121,7 @@ void menuLivros(void) {
         printf("|||        5 - Menu Principal           |:|          0 - Encerrar           |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte qualquer tecla para continuar...\n");
+        printf("||| Aperte ENTER para continuar...\n");
         getchar();
 }
 
@@ -137,7 +147,7 @@ void cadastroLivros(void) {
         printf("|||        5 - Menu Livros            |:|          0 - Encerrar             |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte qualquer tecla para continuar...\n");
+        printf("||| Aperte ENTER para continuar...\n");
         getchar();
 }
 
@@ -163,7 +173,7 @@ void pesquisaLivros(void) {
         printf("|||        5 - Menu Livros            |:|          0 - Encerrar             |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte qualquer tecla para continuar...\n");
+        printf("||| Aperte ENTER para continuar...\n");
         getchar();
 }
 
@@ -189,7 +199,7 @@ void atualizaLivros(void) {
         printf("|||        5 - Menu Livros            |:|          0 - Encerrar             |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte qualquer tecla para continuar...\n");
+        printf("||| Aperte ENTER para continuar...\n");
         getchar();
 }
 
@@ -215,7 +225,7 @@ void excluirLivros(void) {
         printf("|||        5 - Menu Livros            |:|          0 - Encerrar             |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte qualquer tecla para continuar...\n");
+        printf("||| Aperte ENTER para continuar...\n");
         getchar();
 }
 
@@ -241,7 +251,111 @@ void menuUsuarios(void) {
         printf("|||        5 - Menu Principal           |:|          0 - Encerrar           |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte qualquer tecla para continuar...\n");
+        printf("||| Aperte ENTER para continuar...\n");
+        getchar();
+}
+
+void cadastroUsuarios(void) {
+    clearscr();
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                          Cadastrar Usuarios                             |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                    |:| Nome do usuário:                                 |||\n");
+        printf("|||                    |:| Data de nascimento do usuário:                   |||\n");
+        printf("|||                    |:| Sexo do usuário:                                 |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||        5 - Menu Principal           |:|          0 - Encerrar           |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("\n");
+        printf("||| Aperte ENTER para continuar...\n");
+        getchar();
+}
+
+void pesquisaUsuarios(void) {
+    clearscr();
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                         Pesquisa de Usuários                            |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                     Deseja pesquisar por:                               |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                    |:| 1 - Nome do usuário                              |||\n");
+        printf("|||                    |:| 2 - Data de nascimento do usuário                |||\n");
+        printf("|||                    |:| 3 - Sexo do usuário                              |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||        5 - Menu Usuários          |:|          0 - Encerrar             |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("\n");
+        printf("||| Aperte ENTER para continuar...\n");
+        getchar();
+}
+
+void atualizaUsuarios(void) {
+    clearscr();
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                      Atualizar cadastro de Usuários                     |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||     Deseja pesquisar o usuário a ser atualizado por:                    |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                    |:| 1 - Nome do usuário                              |||\n");
+        printf("|||                    |:| 2 - Data de nascimento do usuário                |||\n");
+        printf("|||                    |:| 3 - Sexo do usuário                              |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||        5 - Menu Usuários          |:|          0 - Encerrar             |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("\n");
+        printf("||| Aperte ENTER para continuar...\n");
+        getchar();
+}
+
+void excluirUsuarios(void) {
+    clearscr();
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                      Excluir cadastro de Usuários                       |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||     Deseja pesquisar o usuário a ser excluido por:                      |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                    |:| 1 - Nome do usuário                              |||\n");
+        printf("|||                    |:| 2 - Data de nascimento do usuário                |||\n");
+        printf("|||                    |:| 3 - Sexo do usuário                              |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||        5 - Menu Usuários          |:|          0 - Encerrar             |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("\n");
+        printf("||| Aperte ENTER para continuar...\n");
         getchar();
 }
 
@@ -267,6 +381,6 @@ void menuEmprestimos(void) {
         printf("|||        5 - Menu Principal           |:|          0 - Encerrar           |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte qualquer tecla para continuar...\n");
+        printf("||| Aperte ENTER para continuar...\n");
         getchar();
 }
