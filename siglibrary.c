@@ -20,6 +20,10 @@ void atualizaUsuarios(void);
 void excluirUsuarios(void);
 // Módulo Empréstimos
 void menuEmprestimos(void);
+void efetuarEmprestimos(void);
+void pesquisaEmprestimos(void);
+void atualizaEmprestimos(void);
+void finalizaEmprestimos(void);
 
 
 void clearscr(void);
@@ -29,9 +33,25 @@ void clearscr(void);
 int main(void) {
     menuPrincipal();
     menuAbout();
+
     menuLivros();
+    cadastroLivros();
+    pesquisaLivros();
+    atualizaLivros();
+    excluirLivros();
+
     menuUsuarios();
+    cadastroUsuarios();
+    pesquisaUsuarios();
+    atualizaUsuarios();
+    excluirUsuarios();
+
     menuEmprestimos();
+    efetuarEmprestimos();
+    pesquisaEmprestimos();
+    atualizaEmprestimos();
+    finalizaEmprestimos();
+    
     return 0;
 
 }
@@ -379,6 +399,110 @@ void menuEmprestimos(void) {
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||        5 - Menu Principal           |:|          0 - Encerrar           |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("\n");
+        printf("||| Aperte ENTER para continuar...\n");
+        getchar();
+}
+
+void efetuaEmprestimos(void) {
+    clearscr();
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                          Efetuar Empréstimo                             |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                    |:| Nome do usuário:                                 |||\n");
+        printf("|||                    |:| Livros do empréstimo:                            |||\n");
+        printf("|||                    |:| Período de empréstimo:                           |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||        5 - Menu Empréstimos          |:|          0 - Encerrar          |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("\n");
+        printf("||| Aperte ENTER para continuar...\n");
+        getchar();
+}
+
+void pesquisaEmprestimos(void) {
+    clearscr();
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                        Pesquisa de Empréstimos                          |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                     Deseja pesquisar por:                               |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                    |:| 1 - Nome do usuário                              |||\n");
+        printf("|||                    |:| 2 - Livros em empréstimos                        |||\n");
+        printf("|||                    |:| 3 - Período de empréstimo                        |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||        5 - Menu Empréstimos         |:|         0 - Encerrar            |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("\n");
+        printf("||| Aperte ENTER para continuar...\n");
+        getchar();
+}
+
+void atualizaEmprestimos(void) {
+    clearscr();
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                         Atualizar Empréstimos                           |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||     Deseja pesquisar o usuário a ser atualizado por:                    |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                    |:| 1 - Nome do usuário                              |||\n");
+        printf("|||                    |:| 2 - Livros em empréstimos                        |||\n");
+        printf("|||                    |:| 3 - Período de empréstimo                        |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||        5 - Menu Empréstimos         |:|         0 - Encerrar            |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("\n");
+        printf("||| Aperte ENTER para continuar...\n");
+        getchar();
+}
+
+void finalizaEmprestimos(void) {
+    clearscr();
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                          Finalizar Empréstimos                          |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||     Deseja pesquisar o empréstimo a ser efinalizado por:                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                    |:| 1 - Nome do usuário                              |||\n");
+        printf("|||                    |:| 2 - Livros em empréstimos                        |||\n");
+        printf("|||                    |:| 3 - Período de empréstimo                        |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||        5 - Menu Empréstimos         |:|         0 - Encerrar            |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
         printf("||| Aperte ENTER para continuar...\n");
