@@ -51,7 +51,7 @@ int main(void) {
     pesquisaEmprestimos();
     atualizaEmprestimos();
     finalizaEmprestimos();
-    
+
     return 0;
 
 }
@@ -405,7 +405,7 @@ void menuEmprestimos(void) {
         getchar();
 }
 
-void efetuaEmprestimos(void) {
+void efetuarEmprestimos(void) {
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
