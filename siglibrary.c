@@ -4,22 +4,22 @@
 ////  Assinatura de funções.
 
 // Menú Principal e Tela Sobre.
-void menuPrincipal(void);
+char menuPrincipal(void);
 void menuAbout(void);
 // Módulo Livros.
-void menuLivros(void);
+char menuLivros(void);
 void cadastroLivros(void);
 void pesquisaLivros(void);
 void atualizaLivros(void);
 void excluirLivros(void);
 // Módulo Usuários
-void menuUsuarios(void);
+char menuUsuarios(void);
 void cadastroUsuarios(void);
 void pesquisaUsuarios(void);
 void atualizaUsuarios(void);
 void excluirUsuarios(void);
 // Módulo Empréstimos
-void menuEmprestimos(void);
+char menuEmprestimos(void);
 void efetuarEmprestimos(void);
 void pesquisaEmprestimos(void);
 void atualizaEmprestimos(void);
@@ -31,26 +31,54 @@ void clearscr(void);
 // Função principal.
 
 int main(void) {
+    char opMenu;
+
+
+
     menuPrincipal();
-    menuAbout();
+    opMenu = menuPrincipal();
 
-    menuLivros();
-    cadastroLivros();
-    pesquisaLivros();
-    atualizaLivros();
-    excluirLivros();
+    switch (opMenu){
+        case '1':
+            menuLivros();
+            break;
+        case '2':
+            menuUsuarios();
+            break;
+        case '3':
+            menuEmprestimos();
+            break;
+        case '4':
+            menuAbout();
+            break;
+        case '0':
+            return 0;
+        default:
+            printf("Opção Inválida e/ou inexistente!\n");
+            printf("Aperte ENTER para voltar para o menu principal...");
+            getchar();
+            menuPrincipal();
+            break;
+        }
+   //menuAbout();
 
-    menuUsuarios();
-    cadastroUsuarios();
-    pesquisaUsuarios();
-    atualizaUsuarios();
-    excluirUsuarios();
+   //menuLivros();
+   //cadastroLivros();
+   //pesquisaLivros();
+   //atualizaLivros();
+   //excluirLivros();
 
-    menuEmprestimos();
-    efetuarEmprestimos();
-    pesquisaEmprestimos();
-    atualizaEmprestimos();
-    finalizaEmprestimos();
+   //menuUsuarios();
+   //cadastroUsuarios();
+   //pesquisaUsuarios();
+   //atualizaUsuarios();
+   //excluirUsuarios();
+
+   //menuEmprestimos();
+   //efetuarEmprestimos();
+   //pesquisaEmprestimos();
+   //atualizaEmprestimos();
+   //finalizaEmprestimos();
 
     return 0;
 
@@ -72,7 +100,8 @@ void clearscr(void) {
 
 //  Interfaces e funcionalidades do programa.
 
-void menuPrincipal(void) {
+char menuPrincipal(void) {
+    char opMenuP;
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -93,8 +122,10 @@ void menuPrincipal(void) {
         printf("|||        5 - Sobre o programa         |:|          0 - Encerrar           |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte ENTER para continuar...\n");
-        getchar();
+        printf("||| Escolha sua opção:  \n");
+        scanf("%[0-9]", &opMenuP);
+
+        return opMenuP;
 }
 
 void menuAbout(void) {
@@ -114,12 +145,14 @@ void menuAbout(void) {
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte ENTER para continuar...\n");
+        printf("||| Aperte ENTER para voltar para o menu principal...\n");
         getchar();
 
+        return menuPrincipal();
 }
 
-void menuLivros(void) {
+char menuLivros(void) {
+    char opMenu1;
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -141,11 +174,17 @@ void menuLivros(void) {
         printf("|||        5 - Menu Principal           |:|          0 - Encerrar           |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte ENTER para continuar...\n");
-        getchar();
+        printf("||| Escolha sua opção:  \n");
+        scanf("%[0-9]", &opMenu1);
+
+        return opMenu1;
 }
 
 void cadastroLivros(void) {
+    char livroTitulo[30];
+    char livroAutor[20];
+    char livroGenero[10];
+    int livroCodigo[8];
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -157,14 +196,16 @@ void cadastroLivros(void) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                    |:| Título do livro:                                 |||\n");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ0-9]", livroTitulo);
         printf("|||                    |:| Autor do livro:                                  |||\n");
-        printf("|||                    |:| Gêneros do livro:                                |||\n");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", livroAutor);
+        printf("|||                    |:| Gênero do livro:                                 |||\n");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", livroGenero);
         printf("|||                    |:| Código do livro:                                 |||\n");
+        scanf("%[0-9]", livroCodigo);
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||        5 - Menu Livros            |:|          0 - Encerrar             |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
         printf("||| Aperte ENTER para continuar...\n");
@@ -172,6 +213,7 @@ void cadastroLivros(void) {
 }
 
 void pesquisaLivros(void) {
+    char opMenu;
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -193,11 +235,12 @@ void pesquisaLivros(void) {
         printf("|||        5 - Menu Livros            |:|          0 - Encerrar             |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte ENTER para continuar...\n");
-        getchar();
+        printf("||| Escolha sua opção:  \n");
+        scanf("%[0-9]", &opMenu);        
 }
 
 void atualizaLivros(void) {
+    char opMenu;
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -219,11 +262,12 @@ void atualizaLivros(void) {
         printf("|||        5 - Menu Livros            |:|          0 - Encerrar             |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte ENTER para continuar...\n");
-        getchar();
+        printf("||| Escolha sua opção:  \n");
+        scanf("%[0-9]", opMenu);
 }
 
 void excluirLivros(void) {
+    char opMenu;
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -245,11 +289,12 @@ void excluirLivros(void) {
         printf("|||        5 - Menu Livros            |:|          0 - Encerrar             |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte ENTER para continuar...\n");
-        getchar();
+        printf("||| Escolha sua opção:  \n");
+        scanf("%[0-9]", opMenu);
 }
 
-void menuUsuarios(void) {
+char menuUsuarios(void) {
+    char opMenu2;
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -272,10 +317,15 @@ void menuUsuarios(void) {
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
         printf("||| Aperte ENTER para continuar...\n");
-        getchar();
+        scanf("%[0-9]", &opMenu2);
+
+        return opMenu2;
 }
 
 void cadastroUsuarios(void) {
+    char usuarioNome[20];
+    char usuarioDataNasc[10];
+    char usuarioCodigo;
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -287,14 +337,15 @@ void cadastroUsuarios(void) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                    |:| Nome do usuário:                                 |||\n");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", usuarioNome);
         printf("|||                    |:| Data de nascimento do usuário:                   |||\n");
-        printf("|||                    |:| Sexo do usuário:                                 |||\n");
+        scanf("%[0-9/]", usuarioDataNasc);
+        printf("|||                    |:| Codigo do usuário:                               |||\n");
+        scanf("%[0-9]", usuarioCodigo);
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||        5 - Menu Principal           |:|          0 - Encerrar           |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
         printf("||| Aperte ENTER para continuar...\n");
@@ -302,6 +353,7 @@ void cadastroUsuarios(void) {
 }
 
 void pesquisaUsuarios(void) {
+    char opMenu;
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -314,7 +366,7 @@ void pesquisaUsuarios(void) {
         printf("|||                                                                         |||\n");
         printf("|||                    |:| 1 - Nome do usuário                              |||\n");
         printf("|||                    |:| 2 - Data de nascimento do usuário                |||\n");
-        printf("|||                    |:| 3 - Sexo do usuário                              |||\n");
+        printf("|||                    |:| 3 - Codigo do usuário                              |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -323,11 +375,13 @@ void pesquisaUsuarios(void) {
         printf("|||        5 - Menu Usuários          |:|          0 - Encerrar             |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte ENTER para continuar...\n");
+        printf("||| Escolha sua opção:  \n");
+        scanf("%[0-9]", &opMenu);
         getchar();
 }
 
 void atualizaUsuarios(void) {
+    char opMenu;
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -340,7 +394,7 @@ void atualizaUsuarios(void) {
         printf("|||                                                                         |||\n");
         printf("|||                    |:| 1 - Nome do usuário                              |||\n");
         printf("|||                    |:| 2 - Data de nascimento do usuário                |||\n");
-        printf("|||                    |:| 3 - Sexo do usuário                              |||\n");
+        printf("|||                    |:| 3 - Codigo do usuário                            |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -349,11 +403,13 @@ void atualizaUsuarios(void) {
         printf("|||        5 - Menu Usuários          |:|          0 - Encerrar             |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte ENTER para continuar...\n");
+        printf("||| Escolha sua opção:  \n");
+        scanf("%[0-9]", &opMenu);
         getchar();
 }
 
 void excluirUsuarios(void) {
+    char opMenu;
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -366,7 +422,7 @@ void excluirUsuarios(void) {
         printf("|||                                                                         |||\n");
         printf("|||                    |:| 1 - Nome do usuário                              |||\n");
         printf("|||                    |:| 2 - Data de nascimento do usuário                |||\n");
-        printf("|||                    |:| 3 - Sexo do usuário                              |||\n");
+        printf("|||                    |:| 3 - Codigo do usuário                            |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -375,11 +431,13 @@ void excluirUsuarios(void) {
         printf("|||        5 - Menu Usuários          |:|          0 - Encerrar             |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte ENTER para continuar...\n");
+        printf("||| Escolha sua opção:  \n");
+        scanf("%[0-9]", &opMenu);
         getchar();
 }
 
-void menuEmprestimos(void) {
+char menuEmprestimos(void) {
+    char opMenu3;
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -402,10 +460,15 @@ void menuEmprestimos(void) {
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
         printf("||| Aperte ENTER para continuar...\n");
-        getchar();
+        scanf("%[0-9]", &opMenu3);
+
+        return opMenu3;
 }
 
 void efetuarEmprestimos(void) {
+    char emprestimoNome[20];
+    char emprestimoLivro[30];
+    char emprestimoData[10];
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -417,14 +480,15 @@ void efetuarEmprestimos(void) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                    |:| Nome do usuário:                                 |||\n");
-        printf("|||                    |:| Livros do empréstimo:                            |||\n");
-        printf("|||                    |:| Período de empréstimo:                           |||\n");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", emprestimoNome);
+        printf("|||                    |:| Livro do empréstimo:                             |||\n");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ0-9]", emprestimoLivro);
+        printf("|||                    |:| Período de empréstimo(Data de vencimento):       |||\n");
+        scanf("%[0-9/]", emprestimoData);
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||        5 - Menu Empréstimos          |:|          0 - Encerrar          |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
         printf("||| Aperte ENTER para continuar...\n");
@@ -432,6 +496,7 @@ void efetuarEmprestimos(void) {
 }
 
 void pesquisaEmprestimos(void) {
+    char opMenu;
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -453,11 +518,12 @@ void pesquisaEmprestimos(void) {
         printf("|||        5 - Menu Empréstimos         |:|         0 - Encerrar            |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte ENTER para continuar...\n");
-        getchar();
+        printf("||| Escolha sua opção:  \n");
+        scanf("%[0-9]", &opMenu);
 }
 
 void atualizaEmprestimos(void) {
+    char opMenu;
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -479,11 +545,12 @@ void atualizaEmprestimos(void) {
         printf("|||        5 - Menu Empréstimos         |:|         0 - Encerrar            |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte ENTER para continuar...\n");
-        getchar();
+        printf("||| Escolha sua opção:  \n");
+        scanf("%[0-9]", &opMenu);
 }
 
 void finalizaEmprestimos(void) {
+    char opMenu;
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -505,6 +572,6 @@ void finalizaEmprestimos(void) {
         printf("|||        5 - Menu Empréstimos         |:|         0 - Encerrar            |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte ENTER para continuar...\n");
-        getchar();
+        printf("||| Escolha sua opção:  \n");
+        scanf("%[0-9]", &opMenu);
 }
