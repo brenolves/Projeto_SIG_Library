@@ -8,22 +8,26 @@ char menuPrincipal(void);
 void menuAbout(void);
 // Módulo Livros.
 char menuLivros(void);
-void cadastroLivros(void);
-void pesquisaLivros(void);
-void atualizaLivros(void);
-void excluirLivros(void);
+    void cadastroLivros(void);
+    void pesquisaLivros(void);
+        void pesquisaLivros_Titulo(void);
+        void pesquisaLivros_Autor(void);
+        void pesquisaLivros_Genero(void);
+        void pesquisaLivros_Codigo(void);
+    void atualizaLivros(void);
+    void excluirLivros(void);
 // Módulo Usuários
 char menuUsuarios(void);
-void cadastroUsuarios(void);
-void pesquisaUsuarios(void);
-void atualizaUsuarios(void);
-void excluirUsuarios(void);
+    void cadastroUsuarios(void);
+    void pesquisaUsuarios(void);
+    void atualizaUsuarios(void);
+    void excluirUsuarios(void);
 // Módulo Empréstimos
 char menuEmprestimos(void);
-void efetuarEmprestimos(void);
-void pesquisaEmprestimos(void);
-void atualizaEmprestimos(void);
-void finalizaEmprestimos(void);
+    void efetuarEmprestimos(void);
+    void pesquisaEmprestimos(void);
+    void atualizaEmprestimos(void);
+    void finalizaEmprestimos(void);
 
 
 void clearscr(void);
@@ -31,32 +35,81 @@ void clearscr(void);
 // Função principal.
 
 int main(void) {
-    char opMenu;
+    char opMenuP, opMenu_Livros, opMenu_Usuarios, opMenu_Emprestimos;
 
-    
-    opMenu = menuPrincipal();
-    switch (opMenu){
+    do{
+    opMenuP = menuPrincipal();
+    switch (opMenuP){
         case '1':
-            menuLivros();
+            opMenu_Livros = menuLivros();
+            switch(opMenu_Livros){
+                case '1':
+                    cadastroLivros();
+                    break;
+                case '2':
+                    pesquisaLivros();
+                    break;
+                case '3':
+                    atualizaLivros();
+                    break;
+                case '4':
+                    excluirLivros();
+                    break;
+                case '5':
+                    main();
+                    break;
+            }
+            while(opMenu_Livros != '0');
             break;
         case '2':
-            menuUsuarios();
+            opMenu_Usuarios = menuUsuarios();
+            switch(opMenu_Usuarios){
+                case '1':
+                    cadastroUsuarios();
+                    break;
+                case '2':
+                    pesquisaUsuarios();
+                    break;
+                case '3':
+                    atualizaUsuarios();
+                    break;
+                case '4':
+                    excluirUsuarios();
+                    break;
+                case '5':
+                    main();
+                    break;
+            }
+            while(opMenu_Usuarios != '0');
             break;
         case '3':
-            menuEmprestimos();
+            opMenu_Emprestimos = menuEmprestimos();
+            switch(opMenu_Emprestimos){
+                case '1':
+                    efetuarEmprestimos();
+                    break;
+                case '2':
+                    pesquisaEmprestimos();
+                    break;
+                case '3':
+                    atualizaEmprestimos();
+                    break;
+                case '4':
+                    finalizaEmprestimos();
+                    break;
+                case '5':
+                    main();
+                    break;
+            }
+            while(opMenu_Emprestimos != '0');
             break;
-        case '4':
+        case '5':
             menuAbout();
             break;
-        case '0':
-        return 0;
-    default:
-        printf("Opção Inválida e/ou inexistente!\n");
-        printf("Aperte ENTER para voltar para o menu principal...");
-        getchar();
-        menuPrincipal();
-        break;
         }
+    }
+    while (opMenuP != '0');
+    printf("Programa Encerrado!\n");
 
     return 0;
 
@@ -131,7 +184,7 @@ void menuAbout(void) {
 }
 
 char menuLivros(void) {
-    char opMenu1;
+    char opMenu_Livros;
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -154,10 +207,10 @@ char menuLivros(void) {
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
         printf("||| Escolha sua opção:  \n");
-        scanf("%[0-9]", &opMenu1);
+        scanf("%[0-9]", &opMenu_Livros);
         getchar();
 
-        return opMenu1;
+        return opMenu_Livros;
 }
 
 void cadastroLivros(void) {
@@ -176,15 +229,23 @@ void cadastroLivros(void) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                    |:| Título do livro:                                 |||\n");
+        printf("|||                                         ");
+        printf("                                                                            |||\n");
         scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ0-9]", livroTitulo);
         getchar();
         printf("|||                    |:| Autor do livro:                                  |||\n");
+        printf("|||                                        ");
+        printf("                                                                            |||\n");
         scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", livroAutor);
         getchar();
         printf("|||                    |:| Gênero do livro:                                 |||\n");
+        printf("|||                                         ");
+        printf("                                                                            |||\n");
         scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", livroGenero);
         getchar();
         printf("|||                    |:| Código do livro:                                 |||\n");
+        printf("|||                                         ");
+        printf("                                                                            |||\n");
         scanf("%[0-9]", livroCodigo);
         getchar();
         printf("|||                                                                         |||\n");
@@ -192,8 +253,8 @@ void cadastroLivros(void) {
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        printf("||| Aperte ENTER para continuar...\n");
-        getchar();
+
+        return;
 }
 
 void pesquisaLivros(void) {
@@ -222,6 +283,122 @@ void pesquisaLivros(void) {
         printf("||| Escolha sua opção:  \n");
         scanf("%[0-9]", &opMenu); 
         getchar();       
+}
+
+void pesquisaLivros_Titulo(void) {
+    char tituloLivro[51];
+    clearscr();
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                           Pesquisa de Livros                            |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                     Pesquisa por titulo:                                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                    |:| Título do livro:                                 |||\n");
+        printf("|||                                         ");
+        printf("                                                                            |||\n");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ0-9]", &tituloLivro);
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("\n");
+        getchar();
+
+        return tituloLivro;  
+}
+
+void pesquisaLivros_Autor(void) {
+    char autorLivro[51];
+    clearscr();
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                           Pesquisa de Livros                            |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                     Pesquisa por autor:                                 |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                    |:| Autor do livro:                                  |||\n");
+        printf("|||                                        ");
+        printf("                                                                            |||\n");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", &autorLivro);
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("\n");
+        getchar();
+
+        return autorLivro;  
+}
+
+void pesquisaLivros_Genero(void) {
+    char generoLivro[21];
+    clearscr();
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                           Pesquisa de Livros                            |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                     Pesquisa por gênero:                                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                    |:| Gênero do livro:                                 |||\n");
+        printf("|||                                         ");
+        printf("                                                                            |||\n");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", &generoLivro);
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("\n");
+        getchar();
+
+        return generoLivro;  
+}
+
+void pesquisaLivros_Codigo(void) {
+    int codigoLivro;
+    clearscr();
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                           Pesquisa de Livros                            |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                     Pesquisa por código:                                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                    |:| Código do livro:                                 |||\n");
+        printf("|||                                         ");
+        printf("                                                                            |||\n");
+        scanf("%i", &codigoLivro);
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("\n");
+        getchar();
+
+        return codigoLivro;  
 }
 
 void atualizaLivros(void) {
@@ -325,12 +502,15 @@ void cadastroUsuarios(void) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                    |:| Nome do usuário:                                 |||\n");
+        printf("|||                                         ");
         scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", usuarioNome);
         getchar();
         printf("|||                    |:| Data de nascimento do usuário:                   |||\n");
+        printf("|||                                                       ");
         scanf("%[0-9/]", usuarioDataNasc);
         getchar();
         printf("|||                    |:| Codigo do usuário:                               |||\n");
+        printf("|||                                           ");
         scanf("%[0-9]", usuarioCodigo);
         getchar();
         printf("|||                                                                         |||\n");
