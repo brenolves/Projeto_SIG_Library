@@ -1,13 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "siglibrary.h"
+#include "clearscr.h"
 
 // Módulo Empréstimos
-char menuEmprestimos(void);
-    void efetuarEmprestimos(void);
-    void pesquisaEmprestimos(void);
-    void atualizaEmprestimos(void);
-    void finalizaEmprestimos(void);
+
 
 char menuEmprestimos(void) {
     char opMenu3;

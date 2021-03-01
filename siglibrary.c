@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Modulos\siglibrary.h"
+#include "Modulos/menuLivros.h"
+#include "Modulos/menuUsuarios.h"
+#include "Modulos/menuEmprestimos.h"
+#include "Modulos/clearscr.h"
 
 ////  Assinatura de funções.
 
@@ -14,17 +17,15 @@ int moduloLivros_Atual(void);
 int moduloLivros_Exclu(void);
 // Módulo Usuários
 int moduloUsuarios(void);
-void moduloUsuarios_Pesq(void);
-void moduloUsuarios_Atual(void);
-void moduloUsuarios_Exclu(void);
+//void moduloUsuarios_Pesq(void);
+//void moduloUsuarios_Atual(void);
+//void moduloUsuarios_Exclu(void);
 // Módulo Empréstimos
 int moduloEmprestimos(void);
-void moduloEmprestimos_Pesq(void);
-void moduloEmprestimos_Atual(void);
-void moduloEmprestimos_Exclu(void);
+//void moduloEmprestimos_Pesq(void);
+//void moduloEmprestimos_Atual(void);
+//void moduloEmprestimos_Exclu(void);
 
-
-void clearscr(void);
 
 // Função principal.
 
@@ -213,13 +214,13 @@ int moduloUsuarios(void){
             cadastroUsuarios();
             break;
             case '2':
-            moduloUsuarios_Pesq();
+            //moduloUsuarios_Pesq();
             break;
             case '3':
-            moduloUsuarios_Atual();
+            //moduloUsuarios_Atual();
             break;
             case '4':
-            moduloUsuarios_Exclu();
+            //moduloUsuarios_Exclu();
             break;
             case '5':
             main();
@@ -238,13 +239,13 @@ int moduloEmprestimos(void){
             efetuarEmprestimos();
             break;
             case '2':
-            moduloEmprestimos_Pesq();
+            //moduloEmprestimos_Pesq();
             break;
             case '3':
-            moduloEmprestimos_Atual();
+           // moduloEmprestimos_Atual();
             break;
             case '4':
-            moduloEmprestimos_Exclu();
+           // moduloEmprestimos_Exclu();
             break;
             case '5':
             main();

@@ -1,25 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "siglibrary.h"
+#include "clearscr.h"
 
 // Módulo Livros.
-char menuLivros(void);
-    void cadastroLivros(void);
-    char pesquisaLivros(void);
-        char pesquisaLivros_Titulo(void);
-        char pesquisaLivros_Autor(void);
-        char pesquisaLivros_Genero(void);
-        int pesquisaLivros_Codigo(void);
-    char atualizaLivros(void);
-        char atualizaLivros_Titulo(void);
-        char atualizaLivros_Autor(void);
-        char atualizaLivros_Genero(void);
-        int atualizaLivros_Codigo(void);
-    char excluirLivros(void);
-        char excluirLivros_Titulo(void);
-        char excluirLivros_Autor(void);
-        char excluirLivros_Genero(void);
-        int excluirLivros_Codigo(void);
+
 
 
 char menuLivros(void) {
@@ -152,7 +136,7 @@ char pesquisaLivros_Titulo(void) {
         printf("\n");
         getchar();
 
-        return tituloLivro;  
+       // return tituloLivro;  
 }
 
 char pesquisaLivros_Autor(void) {
@@ -181,7 +165,7 @@ char pesquisaLivros_Autor(void) {
         printf("\n");
         getchar();
 
-        return autorLivro;  
+      //  return autorLivro;  
 }
 
 char pesquisaLivros_Genero(void) {
@@ -210,7 +194,7 @@ char pesquisaLivros_Genero(void) {
         printf("\n");
         getchar();
 
-        return generoLivro;  
+      // return generoLivro;  
 }
 
 int pesquisaLivros_Codigo(void) {
@@ -239,7 +223,7 @@ int pesquisaLivros_Codigo(void) {
         printf("\n");
         getchar();
 
-        return codigoLivro;  
+      //  return codigoLivro;  
 }
 
 char atualizaLivros(void) {
@@ -296,7 +280,7 @@ char atualizaLivros_Titulo(void) {
         printf("\n");
         getchar();
 
-        return tituloLivro;  
+      //  return tituloLivro;  
 }
 
 char atualizaLivros_Autor(void) {
@@ -325,7 +309,7 @@ char atualizaLivros_Autor(void) {
         printf("\n");
         getchar();
 
-        return autorLivro;  
+      //  return autorLivro;  
 }
 
 char atualizaLivros_Genero(void) {
@@ -354,7 +338,7 @@ char atualizaLivros_Genero(void) {
         printf("\n");
         getchar();
 
-        return generoLivro;  
+     //   return generoLivro;  
 }
 
 int atualizaLivros_Codigo(void) {
@@ -383,7 +367,7 @@ int atualizaLivros_Codigo(void) {
         printf("\n");
         getchar();
 
-        return codigoLivro;  
+     //   return codigoLivro;  
 }
 
 char excluirLivros(void) {
@@ -440,7 +424,7 @@ char excluirLivros_Titulo(void) {
         printf("\n");
         getchar();
 
-        return tituloLivro;  
+      //  return tituloLivro;  
 }
 
 char excluirLivros_Autor(void) {
@@ -469,7 +453,7 @@ char excluirLivros_Autor(void) {
         printf("\n");
         getchar();
 
-        return autorLivro;  
+      //  return autorLivro;  
 }
 
 char excluirLivros_Genero(void) {
@@ -498,7 +482,7 @@ char excluirLivros_Genero(void) {
     printf("\n");
     getchar();
 
-    return generoLivro;
+  //  return generoLivro;
 }
 
 int excluirLivros_Codigo(void) {
@@ -527,5 +511,5 @@ int excluirLivros_Codigo(void) {
         printf("\n");
         getchar();
 
-        return codigoLivro;  
+      //  return codigoLivro;  
 }
