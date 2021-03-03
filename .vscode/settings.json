@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "siglibrary.h": "c",
+        "menuemprestimos.h": "c"
+    }
+}

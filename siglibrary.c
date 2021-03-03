@@ -17,14 +17,14 @@ int moduloLivros_Atual(void);
 int moduloLivros_Exclu(void);
 // Módulo Usuários
 int moduloUsuarios(void);
-//void moduloUsuarios_Pesq(void);
-//void moduloUsuarios_Atual(void);
-//void moduloUsuarios_Exclu(void);
+int moduloUsuarios_Pesq(void);
+int moduloUsuarios_Atual(void);
+int moduloUsuarios_Exclu(void);
 // Módulo Empréstimos
 int moduloEmprestimos(void);
-//void moduloEmprestimos_Pesq(void);
-//void moduloEmprestimos_Atual(void);
-//void moduloEmprestimos_Exclu(void);
+int moduloEmprestimos_Pesq(void);
+int moduloEmprestimos_Atual(void);
+int moduloEmprestimos_Exclu(void);
 
 
 // Função principal.
@@ -214,13 +214,13 @@ int moduloUsuarios(void){
             cadastroUsuarios();
             break;
             case '2':
-            //moduloUsuarios_Pesq();
+            moduloUsuarios_Pesq();
             break;
             case '3':
-            //moduloUsuarios_Atual();
+            moduloUsuarios_Atual();
             break;
             case '4':
-            //moduloUsuarios_Exclu();
+            moduloUsuarios_Exclu();
             break;
             case '5':
             main();
@@ -230,27 +230,153 @@ int moduloUsuarios(void){
     return 0;
 }
 
-int moduloEmprestimos(void){
-    char opModulo_L;
+int moduloUsuarios_Pesq(void){
+    char opModulo_U;
     do{
-        opModulo_L = menuEmprestimos();
-        switch(opModulo_L){
+        opModulo_U = pesquisaUsuarios();
+        switch(opModulo_U){
+            case '1':
+            pesquisaUsuarios_Nome();
+            break;
+            case '2':
+            pesquisaUsuarios_Nasc();
+            break;
+            case '3':
+            pesquisaUsuarios_Codigo();
+            break;
+            case '5':
+            break;
+        }
+    }while (opModulo_U != '0');
+    return 0;
+}
+
+int moduloUsuarios_Atual(void){
+    char opModulo_U;
+    do{
+        opModulo_U = atualizaUsuarios();
+        switch(opModulo_U){
+            case '1':
+            atualizaUsuarios_Nome();
+            break;
+            case '2':
+            pesquisaUsuarios_Nasc();
+            break;
+            case '3':
+            pesquisaUsuarios_Codigo();
+            break;
+            case '5':
+            break;
+        }
+    }while (opModulo_U != '0');
+    return 0;
+}
+
+int moduloUsuarios_Exclu(void){
+    char opModulo_U;
+    do{
+        opModulo_U = excluirUsuarios();
+        switch(opModulo_U){
+            case '1':
+            excluirUsuarios_Nome();
+            break;
+            case '2':
+            excluirUsuarios_Nasc();
+            break;
+            case '3':
+            excluirUsuarios_Codigo();
+            break;
+            case '5':
+            break;
+        }
+    }while (opModulo_U != '0');
+    return 0;
+}
+
+int moduloEmprestimos(void){
+    char opModulo_E;
+    do{
+        opModulo_E = menuEmprestimos();
+        switch(opModulo_E){
             case '1':
             efetuarEmprestimos();
             break;
             case '2':
-            //moduloEmprestimos_Pesq();
+            moduloEmprestimos_Pesq();
             break;
             case '3':
-           // moduloEmprestimos_Atual();
+            moduloEmprestimos_Atual();
             break;
             case '4':
-           // moduloEmprestimos_Exclu();
+            moduloEmprestimos_Exclu();
             break;
             case '5':
             main();
             break;
         }
-    }while (opModulo_L != '0');
+    }while (opModulo_E != '0');
+    return 0;
+}
+
+int moduloEmprestimos_Pesq(void){
+    char opModulo_E;
+    do{
+        opModulo_E = pesquisaEmprestimos();
+        switch(opModulo_E){
+            case '1':
+            pesquisaEmprestimos_Nome();
+            break;
+            case '2':
+            pesquisaEmprestimos_Livro();
+            break;
+            case '3':
+            pesquisaEmprestimos_Data();
+            break;
+            case '5':
+            break;
+        }
+    }while (opModulo_E != '0');
+    return 0;
+}
+
+int moduloEmprestimos_Atual(void){
+    char opModulo_E;
+    do{
+        opModulo_E = atualizaEmprestimos();
+        switch(opModulo_E){
+            case '1':
+            atualizaEmprestimos_Nome();
+            break;
+            case '2':
+            atualizaEmprestimos_Livro();
+            break;
+            case '3':
+            atualizaEmprestimos_Data();
+            break;
+            case '5':
+            break;
+        }
+    }while (opModulo_E != '0');
+    return 0;
+}
+
+int moduloEmprestimos_Exclu(void){
+    char opModulo_E;
+    do{
+        opModulo_E = finalizaEmprestimos();
+        switch(opModulo_E){
+            case '1':
+            finalizaEmprestimos_Nome();
+            break;
+            case '2':
+            finalizaEmprestimos_Livro();
+            break;
+            case '3':
+            finalizaEmprestimos_Data();
+            break;
+            case '5':
+            break;
+        }
+    }while (opModulo_E != '0');
     return 0;
 }
