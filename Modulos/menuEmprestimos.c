@@ -94,6 +94,8 @@ char pesquisaEmprestimos(void) {
         printf("||| Escolha sua opção:  \n");
         scanf("%[0-9]", &opMenu);
         getchar();
+
+        return opMenu;
 }
 
 char pesquisaEmprestimos_Nome(void) {
@@ -211,6 +213,8 @@ char atualizaEmprestimos(void) {
         printf("||| Escolha sua opção:  \n");
         scanf("%[0-9]", &opMenu);
         getchar();
+
+        return opMenu;
 }
 
 char atualizaEmprestimos_Nome(void) {
@@ -328,6 +332,8 @@ char finalizaEmprestimos(void) {
         printf("||| Escolha sua opção:  \n");
         scanf("%[0-9]", &opMenu);
         getchar();
+
+        return opMenu;
 }
 
 char finalizaEmprestimos_Nome(void) {

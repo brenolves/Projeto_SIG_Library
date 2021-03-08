@@ -40,7 +40,7 @@ void cadastroLivros(void) {
     char livroTitulo[51];
     char livroAutor[51];
     char livroGenero[21];
-    int livroCodigo[9];
+    int livroCodigo;
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -53,7 +53,7 @@ void cadastroLivros(void) {
         printf("|||                                                                         |||\n");
         printf("|||                    |:| Título do livro:                                 |||\n");
         printf("|||                                         ");
-        printf("                                                                            |||\n");
+        printf("                                                                            |||");
         scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ0-9]", livroTitulo);
         getchar();
         printf("|||                    |:| Autor do livro:                                  |||\n");
@@ -77,7 +77,7 @@ void cadastroLivros(void) {
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
 
-        return;
+        //return;
 }
 
 char pesquisaLivros(void) {
@@ -252,6 +252,8 @@ char atualizaLivros(void) {
         printf("||| Escolha sua opção:  \n");
         scanf("%[0-9]", opMenu);
         getchar();
+
+        return opMenu;
 }
 
 char atualizaLivros_Titulo(void) {
@@ -396,6 +398,8 @@ char excluirLivros(void) {
         printf("||| Escolha sua opção:  \n");
         scanf("%[0-9]", opMenu);
         getchar();
+
+        return opMenu;
 }
 
 char excluirLivros_Titulo(void) {

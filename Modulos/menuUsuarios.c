@@ -217,6 +217,8 @@ char atualizaUsuarios(void) {
         printf("||| Escolha sua opção:  \n");
         scanf("%[0-9]", &opMenu);
         getchar();
+
+        return opMenu;
 }
 
 char atualizaUsuarios_Nome(void) {
@@ -335,6 +337,8 @@ char excluirUsuarios(void) {
         printf("||| Escolha sua opção:  \n");
         scanf("%[0-9]", &opMenu);
         getchar();
+
+        return opMenu;
 }
 
 char excluirUsuarios_Nome(void) {
