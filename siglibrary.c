@@ -4,6 +4,7 @@
 #include "Modulos/menuUsuarios.h"
 #include "Modulos/menuEmprestimos.h"
 #include "Modulos/clearscr.h"
+#include "Modulos/moduloRelatorios.h"
 
 ////  Assinatura de funções.
 
@@ -25,6 +26,8 @@ int moduloEmprestimos(void);
 int moduloEmprestimos_Pesq(void);
 int moduloEmprestimos_Atual(void);
 int moduloEmprestimos_Exclu(void);
+// Módulo Relatórios
+int moduloRelatorios(void);
 
 
 // Função principal.
@@ -43,6 +46,9 @@ int main(void) {
             break;
         case '3':
             moduloEmprestimos();
+            break;
+        case '4':
+            moduloRelatorios();
             break;
         case '5':
             menuAbout();
@@ -73,6 +79,7 @@ char menuPrincipal(void) {
         printf("|||                    |#| 1 - Livros                                       |||\n");
         printf("|||                    |#| 2 - Usuários                                     |||\n");
         printf("|||                    |#| 3 - Empréstimos                                  |||\n");
+        printf("|||                    |#| 4 - Relatórios                                   |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -378,5 +385,21 @@ int moduloEmprestimos_Exclu(void){
             break;
         }
     }while (opModulo_E != '0');
+    return 0;
+}
+
+int moduloRelatorios(void) {
+    char opModulo_R;
+    do{
+        opModulo_R = menuRelatorios();
+        switch(opModulo_R){
+            case '1':
+            break;
+            case '2':
+            break;
+            case '3':
+            break;
+        }
+    }while (opModulo_R != '0');
     return 0;
 }

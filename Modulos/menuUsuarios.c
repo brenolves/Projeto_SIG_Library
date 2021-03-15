@@ -51,15 +51,15 @@ void cadastroUsuarios(void) {
         printf("|||                                                                         |||\n");
         printf("|||                    |:| Nome do usuário:                                 |||\n");
         printf("|||                                         ");
-        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", usuarioNome);
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", &usuarioNome);
         getchar();
         printf("|||                    |:| Data de nascimento do usuário:                   |||\n");
         printf("|||                                                       ");
-        scanf("%[0-9/]", usuarioDataNasc);
+        scanf("%[0-9/]", &usuarioDataNasc);
         getchar();
         printf("|||                    |:| Codigo do usuário:                               |||\n");
         printf("|||                                           ");
-        scanf("%[0-9]", usuarioCodigo);
+        scanf("%[0-9]", &usuarioCodigo);
         getchar();
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");

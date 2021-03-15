@@ -50,13 +50,13 @@ void efetuarEmprestimos(void) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                    |:| Nome do usuário:                                 |||\n");
-        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", emprestimoNome);
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", &emprestimoNome);
         getchar();
         printf("|||                    |:| Livro do empréstimo:                             |||\n");
-        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ0-9]", emprestimoLivro);
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ0-9]", &emprestimoLivro);
         getchar();
         printf("|||                    |:| Período de empréstimo(Data de vencimento):       |||\n");
-        scanf("%[0-9/]", emprestimoData);
+        scanf("%[0-9/]", &emprestimoData);
         getchar();
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
