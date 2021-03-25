@@ -25,7 +25,7 @@ char menuEmprestimos(void) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||        5 - Menu Principal           |:|          0 - Encerrar           |||\n");
+        printf("|||                             0 - Menu Anterior                           |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
         printf("||| Aperte ENTER para continuar...\n");
@@ -88,7 +88,7 @@ char pesquisaEmprestimos(void) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||        5 - Menu Empréstimos         |:|         0 - Encerrar            |||\n");
+        printf("|||                             0 - Menu Anterior                           |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
         printf("||| Escolha sua opção:  \n");
@@ -207,7 +207,7 @@ char atualizaEmprestimos(void) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||        5 - Menu Empréstimos         |:|         0 - Encerrar            |||\n");
+        printf("|||                             0 - Menu Anterior                           |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
         printf("||| Escolha sua opção:  \n");
@@ -326,7 +326,7 @@ char finalizaEmprestimos(void) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||        5 - Menu Empréstimos         |:|         0 - Encerrar            |||\n");
+        printf("|||                             0 - Menu Anterior                           |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
         printf("||| Escolha sua opção:  \n");

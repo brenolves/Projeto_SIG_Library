@@ -29,6 +29,17 @@ int moduloEmprestimos_Exclu(void);
 // Módulo Relatórios
 int moduloRelatorios(void);
 
+// Variáveis
+char livroTitulo[] = "Neuromancer: 1", livroAutor[] = "William Gibson", livroGenero[] = "Ficção Científica";
+int livroCodigo = 124123124, n = 5;
+
+char nome[] = "Breno", datanasc[] = "30/04/1999";
+int usuarioCodigo = 245325435;
+
+char dataemprestimo[] = "24/03/2021";
+
+
+
 
 // Função principal.
 
@@ -394,10 +405,13 @@ int moduloRelatorios(void) {
         opModulo_R = menuRelatorios();
         switch(opModulo_R){
             case '1':
+            listaCadastros_Livros(livroTitulo, livroAutor, livroGenero, livroCodigo, n);
             break;
             case '2':
+            listaCadastros_Usuarios(nome, datanasc, usuarioCodigo, n);
             break;
             case '3':
+            listaEmprestimos(nome, livroTitulo, dataemprestimo, n);
             break;
         }
     }while (opModulo_R != '0');

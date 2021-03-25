@@ -91,7 +91,7 @@ char pesquisaUsuarios(void) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||        5 - Menu Usuários          |:|          0 - Encerrar             |||\n");
+        printf("|||                             0 - Menu Anterior                           |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
         printf("||| Escolha sua opção:  \n");
@@ -211,7 +211,7 @@ char atualizaUsuarios(void) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||        5 - Menu Usuários          |:|          0 - Encerrar             |||\n");
+        printf("|||                             0 - Menu Anterior                           |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
         printf("||| Escolha sua opção:  \n");
@@ -331,7 +331,7 @@ char excluirUsuarios(void) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||        5 - Menu Usuários          |:|          0 - Encerrar             |||\n");
+        printf("|||                             0 - Menu Anterior                           |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
         printf("||| Escolha sua opção:  \n");
