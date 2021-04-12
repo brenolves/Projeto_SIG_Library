@@ -5,6 +5,7 @@
 #include "Modulos/menuEmprestimos.h"
 #include "Modulos/clearscr.h"
 #include "Modulos/moduloRelatorios.h"
+#include "Modulos/moduloValida.h"
 
 ////  Assinatura de funções.
 
@@ -45,7 +46,6 @@ char dataemprestimo[] = "24/03/2021";
 
 int main(void) {
     char opMenuP;
-
     do{
     opMenuP = menuPrincipal();
     switch (opMenuP){
@@ -64,6 +64,14 @@ int main(void) {
         case '5':
             menuAbout();
             break;
+        case '0':
+            continue;
+        default:
+            printf("\n");
+            clearscr();
+            printf("Opção Inválida!\n");
+            printf("Aperte ENTER para voltar para o menú principal.");
+            getchar();
         }
     }
     while (opMenuP != '0');
@@ -76,33 +84,35 @@ int main(void) {
 //  Interfaces e funcionalidades do programa.
 
 char menuPrincipal(void) {
-    char opMenuP;
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                            Menu Principal                               |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                    |#| 1 - Livros                                       |||\n");
-        printf("|||                    |#| 2 - Usuários                                     |||\n");
-        printf("|||                    |#| 3 - Empréstimos                                  |||\n");
-        printf("|||                    |#| 4 - Relatórios                                   |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||        5 - Sobre o programa         |:|          0 - Encerrar           |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
-        printf("||| Escolha sua opção:  \n");
-        scanf("%[0-9]", &opMenuP);
-        getchar();
+    char opMenu;
 
-        return opMenuP;
+    clearscr();
+    printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+    printf("|||                                                                         |||\n");
+    printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
+    printf("|||                                                                         |||\n");
+    printf("|||                                                                         |||\n");
+    printf("|||                            Menu Principal                               |||\n");
+    printf("|||                                                                         |||\n");
+    printf("|||                                                                         |||\n");
+    printf("|||                                                                         |||\n");
+    printf("|||                    |#| 1 - Livros                                       |||\n");
+    printf("|||                    |#| 2 - Usuários                                     |||\n");
+    printf("|||                    |#| 3 - Empréstimos                                  |||\n");
+    printf("|||                    |#| 4 - Relatórios                                   |||\n");
+    printf("|||                                                                         |||\n");
+    printf("|||                                                                         |||\n");
+    printf("|||                                                                         |||\n");
+    printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+    printf("|||        5 - Sobre o programa         |:|          0 - Encerrar           |||\n");
+    printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+    printf("\n");
+    printf("||| Escolha sua opção: ");
+    scanf("%[0-9]", &opMenu);
+    getchar();
+
+
+    return opMenu;
 }
 
 void menuAbout(void) {
@@ -142,9 +152,6 @@ int moduloLivros(void){
             break;
             case '4':
             moduloLivros_Exclu();
-            break;
-            case '5':
-            main();
             break;
         }
     }while (opModulo_L != '0');

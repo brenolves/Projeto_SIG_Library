@@ -1,6 +1,6 @@
 // Módulo Livros
 char menuLivros(void);
-    void cadastroLivros(void);
+    void cadastroLivros();
     char pesquisaLivros(void);
         char pesquisaLivros_Titulo(void);
         char pesquisaLivros_Autor(void);

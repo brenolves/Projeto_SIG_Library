@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "moduloValida.h"
+#include "clearscr.h"
 // Feito por @flgorgonio
 int testaData(int dd, int mm, int aa){
   int maiorDia;
@@ -58,11 +59,23 @@ int testaNome(char nome[]) {
   return 1;
 }
 
-int testaCodigo(int codigo) {
-  if (codigo > 0) {
-    return 0;
-  } else if (!isdigit(codigo)) {
-    return 0;
+int testaCodigo(char* codigo) {
+  int tam = strlen(codigo);
+  for (int i = 0;i < tam; i++) {
+    if (codigo[i] >= 48 && codigo[i] <= 57) {
+      continue;
+    }
+    else {
+      return 0;
+    }
   }
   return 1;
+}
+
+int validaOpcao(char opcao) {
+  if (opcao >= '0' && opcao <= '9') {
+    return 1;
+  } else {
+    return 0;
+  }
 }
