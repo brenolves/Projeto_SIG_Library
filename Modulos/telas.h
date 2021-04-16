@@ -8,5 +8,6 @@ char* insereTitulo(void);
 void mcadastroLivro (Livro*);
 void mcadastroUsuario (Usuario*);
 void mcadastroEmprestimo (Emprestimo*);
+void arq_msgErro(void);
 
 

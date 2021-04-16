@@ -487,9 +487,7 @@ void guardarUsuario(Usuario* user) {
 
 	arq = fopen("usuarios.dat", "ab");
 	if (arq == NULL) {
-		printf("||| Não foi possível abrir o arquivo de dados...\n");
-        printf("||| Fechando programa...\n");
-        exit(1);
+		arq_msgErro();
 	}
 	fwrite(user, sizeof(Usuario), 1, arq);
 	fclose(arq);

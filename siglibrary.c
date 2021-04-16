@@ -152,7 +152,7 @@ int moduloLivros(void){
                 break;
 
             case '3':
-                moduloLivros_Atual();
+                atualizaLivros();
                 break;
 
             case '4':
@@ -192,28 +192,6 @@ int moduloLivros_Pesq(void){
     return 0;
 }
 
-int moduloLivros_Atual(void){
-    char opModulo_L;
-    do{
-        opModulo_L = atualizaLivros();
-        switch(opModulo_L){
-            case '1':
-                atualizaLivros_Titulo();
-                break;
-
-            case '2':
-                atualizaLivros_Codigo();
-                break;
-                
-            case '0':
-                continue;
-
-            default:
-                validaMenu();
-            }
-    }while (opModulo_L != '0');
-    return 0;
-}
 
 int moduloLivros_Exclu(void){
     char opModulo_L;

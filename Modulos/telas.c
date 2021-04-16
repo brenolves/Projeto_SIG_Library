@@ -132,3 +132,9 @@ void mcadastroEmprestimo (Emprestimo* empr) {
         printf("||| Pressione ENTER para voltar ao menu...\n");
         getchar();
 }
+
+void arq_msgErro(void) {
+    printf("||| Não foi possível abrir o arquivo de dados...\n");
+    printf("||| Fechando programa...\n");
+    exit(1);
+}
