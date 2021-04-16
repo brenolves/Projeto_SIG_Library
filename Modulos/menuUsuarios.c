@@ -2,18 +2,9 @@
 #include <stdlib.h>
 #include "clearscr.h"
 #include "moduloValida.h"
+#include "telas.h"
 
 // Módulo Usuários
-
-struct usuario {
-    char usuarioNome[51];
-    char usuarioDataNasc[11];
-    char usuarioCPF[12];
-    char status;
-};
-
-typedef struct usuario Usuario;
-
 
 char menuUsuarios(void) {
     char opMenu;
@@ -47,25 +38,27 @@ char menuUsuarios(void) {
     return opMenu;
 }
 
+// Cadastros
+
 void cadastroUsuarios(void) {
     Usuario* user;
+    int tentar = 0;
+
+    // Checar se existe memória disponível.
     do{
         user = (Usuario*) malloc(sizeof(Usuario));
         if (user == NULL) {
-            char tentar;
-            printf("Memória insuficiente!\n");
-            printf("Deseja tentar denovo?\n");
-            printf("1 = Sim       0 = Não\n");
-            printf(">> ");
-            scanf("%[0-1]", &tentar);
-            printf("\n");
-            if (tentar == '1') {
-                continue;
-            }
-            continue;
+            tentar = memoriaAlocada();
         }
-    } while(user == NULL);
+    } while(tentar == 1);
+
+    user = tela_CadUsuario(user);
+    guardarUsuario(user);
+    free(user);
     
+}
+
+Usuario* tela_CadUsuario(Usuario* user) {
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -76,18 +69,30 @@ void cadastroUsuarios(void) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
-        printf("|||                    |:| Nome do usuário:                                 |||\n");
-        printf("|||                                         ");
-        scanf("%50[^\n]", user->usuarioNome);
-        getchar();
-        printf("|||                    |:| Data de nascimento do usuário:                   |||\n");
-        printf("|||                                                       ");
-        scanf("%10[^\n]", user->usuarioDataNasc);
-        getchar();
-        printf("|||                    |:| Codigo do usuário:                               |||\n");
-        printf("|||                                           ");
-        scanf("%11[^\n]", user->usuarioCPF);
-        getchar();
+        printf("|||                    |:| Nome do usuário: ");
+
+        do {
+            scanf(" %50[^\n]", user->usuarioNome);
+            getchar();
+        }while (!testaNome(user->usuarioNome));
+
+        printf("                                                                            |||\n");
+        printf("|||                    |:| Data de nascimento do usuário(dd/mm/aaaa): ");
+
+        do {
+            scanf(" %10[^\n]", user->usuarioDataNasc);
+            getchar();
+        }while (!testaDataNasc(user->usuarioDataNasc));
+
+        printf("                                                                            |||\n");
+        printf("|||                    |:| CPF do usuário (Somente números): ");
+
+        do{
+            scanf(" %11[^\n]", user->usuarioCPF);
+            getchar();
+        }while (!testaCPF(user->usuarioCPF));
+
+        printf("                                                                            |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -95,7 +100,13 @@ void cadastroUsuarios(void) {
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
         user->status = '1';
+
+        mcadastroUsuario(user);
+
+        return user;
 }
+
+// Pesquisas
 
 char pesquisaUsuarios(void) {
     char opMenu;
@@ -130,7 +141,8 @@ char pesquisaUsuarios(void) {
 }
 
 char pesquisaUsuarios_Nome(void) {
-    char nomeUsuario[51];
+    Usuario* user;
+    user = (Usuario*) malloc(sizeof(user->usuarioNome));
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -144,8 +156,10 @@ char pesquisaUsuarios_Nome(void) {
         printf("|||                    |:| Nome do usuário:                                 |||\n");
         printf("|||                                         ");
         printf("                                                                            |||\n");
-        scanf("%[^\n]", nomeUsuario);
-        getchar();
+        do{
+            scanf("%50[^\n]", user->usuarioNome);
+            getchar();
+        }while (!testaNome(user->usuarioNome));
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -218,6 +232,8 @@ int pesquisaUsuarios_Codigo(void) {
 
       //  return codigoUsuario;  
 }
+
+// Atualizações
 
 char atualizaUsuarios(void) {
     char opMenu;
@@ -341,6 +357,8 @@ int atualizaUsuarios_Codigo(void) {
      //   return codigoUsuario;  
 }
 
+// Exclusões
+
 char excluirUsuarios(void) {
     char opMenu;
         
@@ -461,4 +479,18 @@ int excluirUsuarios_Codigo(void) {
         getchar();
 
       //  return codigoUsuario;  
+}
+
+
+void guardarUsuario(Usuario* user) {
+	FILE* arq;
+
+	arq = fopen("usuarios.dat", "ab");
+	if (arq == NULL) {
+		printf("||| Não foi possível abrir o arquivo de dados...\n");
+        printf("||| Fechando programa...\n");
+        exit(1);
+	}
+	fwrite(user, sizeof(Usuario), 1, arq);
+	fclose(arq);
 }

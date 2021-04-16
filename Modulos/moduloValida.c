@@ -4,6 +4,11 @@
 #include <ctype.h>
 #include "moduloValida.h"
 #include "clearscr.h"
+#include "menuLivros.h"
+#include "menuUsuarios.h"
+#include "menuEmprestimos.h"
+//////////////////////////////////////////////////////////////
+
 // Feito por @flgorgonio
 int testaData(int dd, int mm, int aa){
   int maiorDia;
@@ -43,26 +48,36 @@ int testaHora(int hora, int minuto){
     }
     return 1;
 }
-// Ainda em desenvolvimento
+
 int testaNome(char nome[]) {
-  int tamanho;
   if (strlen(nome) == 0) {
+    printf("|||                    Nome inválido!\n");
+    printf("|||                    Tente novamente!\n");
+    printf("|||                                         ");
     return 0;
   }
   for (int i = 0; i < strlen(nome); i++) {
     if (isalpha(nome[i])) {
       continue;
-   } else {
-     return 0;
+    } else if (!isdigit(nome[i])) {
+      continue;
+    } else {
+      printf("|||                    Nome inválido!\n");
+      printf("|||                    Tente novamente!\n");
+      printf("|||                                         ");
+      return 0;
    }
   } 
   return 1;
 }
 
-int testaCodigo(char* codigo) {
+int testaCPF(char* codigo) {
   int tam = strlen(codigo);
   for (int i = 0;i < tam; i++) {
     if (codigo[i] >= 48 && codigo[i] <= 57) {
+      continue;
+    }
+    else if (tam == 11){
       continue;
     }
     else {
@@ -78,4 +93,78 @@ int validaOpcao(char opcao) {
   } else {
     return 0;
   }
+}
+
+int memoriaAlocada(void) {
+  char tentar;
+  printf("Memória insuficiente!\n");
+  printf("Deseja tentar denovo?\n");
+  printf("1 = Sim       0 = Não\n");
+  printf(">> ");
+  scanf("%[0-1]", &tentar);
+  printf("\n");
+  return tentar;
+}
+
+int testaTitulo(char* titulo) {
+  if (strlen(titulo) == 0) {
+    printf("|||                    Título inválido!\n");
+    printf("|||                    Tente novamente!\n");
+    printf("|||                                         ");
+    return 0;
+  }
+  for (int i = 0; i < strlen(titulo); i++) {
+    if ((isalpha(titulo[i])) || (isdigit(titulo[i]))) {
+      break;
+   } else {
+      printf("|||                    Título inválido!\n");
+      printf("|||                    Tente novamente!\n");
+      printf("|||                                         ");
+      return 0;
+   }
+  } 
+  return 1;
+}
+
+int testaISBN(char* isbn) {
+  int tam = strlen(isbn);
+  if (tam > 13 || tam < 13) {
+    printf("|||                    ISBN inválido!\n");
+    printf("|||                    Tente novamente!\n");
+    printf("|||                                         ");
+    return 0;
+  }
+  return 1;
+}
+
+int testaDataNasc(char* nasc) {
+  int tam = strlen(nasc);
+  if (tam > 10 || tam < 10) {
+    printf("|||                    Data de nascimento inválida!\n");
+    printf("|||                    Tente novamente!\n");
+    printf("|||                                         ");
+    return 0;
+  }
+
+  for (int i=0; i<=tam; i++) {
+    if (nasc[i] >= 47 && nasc[i] <= 57) {
+      continue;
+    }else if ((nasc[2] == '/') && (nasc[5] == '/')) {
+      break;
+    }else {
+      printf("|||                    Data de nascimento inválida!\n");
+      printf("|||                    Tente novamente!\n");
+      printf("|||                                         ");
+      return 0;
+    }
+  }
+  return 1;
+}
+
+void validaMenu(void) {
+  printf("\n");
+  clearscr();
+  printf("Opção Inválida!\n");
+  printf("Aperte ENTER para voltar para o menú.");
+  getchar();
 }

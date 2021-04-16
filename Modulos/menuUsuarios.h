@@ -1,4 +1,20 @@
 // Módulo Usuários
+
+struct usuario {
+    char usuarioNome[51];
+    char usuarioDataNasc[11];
+    char usuarioCPF[12];
+    char status;
+};
+
+typedef struct usuario Usuario;
+
+
+void guardarUsuario(Usuario*);
+Usuario* tela_CadUsuario(Usuario*);
+
+
+
 char menuUsuarios(void);
     void cadastroUsuarios(void);
     char pesquisaUsuarios(void);

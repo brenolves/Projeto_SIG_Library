@@ -2,17 +2,10 @@
 #include <stdlib.h>
 #include "clearscr.h"
 #include "moduloValida.h"
+#include "telas.h"
 
 // Módulo Empréstimos
 
-struct emprestimo {
-    char empr_CPF[51];
-    char empr_ISBN[14];
-    char empr_Data[11];
-    char status;
-};
-
-typedef struct emprestimo Emprestimo;
 
 char menuEmprestimos(void) {
     char opMenu;
@@ -46,25 +39,26 @@ char menuEmprestimos(void) {
     return opMenu;
 }
 
+// Cadastros
+
 void efetuarEmprestimos(void) {
     Emprestimo* empr;
+    int tentar;
+
+    // Checar se existe memória disponível.
     do{
         empr = (Emprestimo*) malloc(sizeof(Emprestimo));
         if (empr == NULL) {
-            char tentar;
-            printf("Memória insuficiente!\n");
-            printf("Deseja tentar denovo?\n");
-            printf("1 = Sim       0 = Não\n");
-            printf(">> ");
-            scanf("%[0-1]", &tentar);
-            printf("\n");
-            if (tentar == '1') {
-                continue;
-            }
-            continue;
+            tentar = memoriaAlocada();
         }
-    } while(empr == NULL);
+    } while(tentar == 1);
 
+    empr = tela_CadEmpr(empr);
+    guardarEmprestimo(empr);
+    free(empr);
+}
+
+Emprestimo* tela_CadEmpr(Emprestimo* empr) {
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -75,15 +69,29 @@ void efetuarEmprestimos(void) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
-        printf("|||                    |:| Nome do usuário:                                 |||\n");
-        scanf("%50[^\n]", empr->empr_CPF);
-        getchar();
-        printf("|||                    |:| Livro do empréstimo:                             |||\n");
-        scanf("%13[^\n]", empr->empr_ISBN);
-        getchar();
-        printf("|||                    |:| Período de empréstimo(Data de vencimento):       |||\n");
-        scanf("%10[^\n]", empr->empr_Data);
-        getchar();
+        printf("|||                    |:| CPF do usuário: ");
+
+        do {
+            scanf(" %50[^\n]", empr->empr_CPF);
+            getchar();
+        }while (!testaCPF(empr->empr_CPF));
+        
+        printf("                                                                            |||\n");
+        printf("|||                    |:| ISBN do livro: ");
+
+        do {
+            scanf(" %13[^\n]", empr->empr_ISBN);
+            getchar(); 
+        }while(!testaISBN(empr->empr_ISBN));
+        
+        printf("                                                                            |||\n");
+        printf("|||                    |:| Período de empréstimo(Data de vencimento): ");
+        
+        do {
+            scanf(" %10[^\n]", empr->empr_Data);
+            getchar();
+        }while (!testaDataNasc(empr->empr_Data));
+        printf("                                                                            |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -91,7 +99,13 @@ void efetuarEmprestimos(void) {
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
         empr->status = '1';
+
+        mcadastroEmprestimo(empr);
+
+        return empr;
 }
+
+// Pesquisas
 
 char pesquisaEmprestimos(void) {
     char opMenu;
@@ -214,6 +228,8 @@ char pesquisaEmprestimos_Data(void) {
        // return dataEmprestimo;  
 }
 
+// Atualizações
+
 char atualizaEmprestimos(void) {
     char opMenu;
         
@@ -335,6 +351,8 @@ char atualizaEmprestimos_Data(void) {
        // return dataEmprestimo;  
 }
 
+// Exclusões
+
 char finalizaEmprestimos(void) {
     char opMenu;
     clearscr();
@@ -452,4 +470,18 @@ char finalizaEmprestimos_Data(void) {
         getchar();
 
        // return dataEmprestimo;  
+}
+
+
+void guardarEmprestimo(Emprestimo* empr) {
+	FILE* arq;
+
+	arq = fopen("emprestimos.dat", "ab");
+	if (arq == NULL) {
+		printf("||| Não foi possível abrir o arquivo de dados...\n");
+        printf("||| Fechando programa...\n");
+        exit(1);
+	}
+	fwrite(empr, sizeof(Emprestimo), 1, arq);
+	fclose(arq);
 }

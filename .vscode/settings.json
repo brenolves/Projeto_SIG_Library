@@ -2,6 +2,8 @@
     "files.associations": {
         "stdio.h": "c",
         "siglibrary.h": "c",
-        "menuemprestimos.h": "c"
+        "menuemprestimos.h": "c",
+        "clearscr.h": "c",
+        "menulivros.h": "c"
     }
 }

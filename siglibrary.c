@@ -52,26 +52,28 @@ int main(void) {
         case '1':
             moduloLivros();
             break;
+
         case '2':
             moduloUsuarios();
             break;
+
         case '3':
             moduloEmprestimos();
             break;
+
         case '4':
             moduloRelatorios();
             break;
+
         case '5':
             menuAbout();
             break;
+
         case '0':
             continue;
+
         default:
-            printf("\n");
-            clearscr();
-            printf("Opção Inválida!\n");
-            printf("Aperte ENTER para voltar para o menú principal.");
-            getchar();
+            validaMenu();
         }
     }
     while (opMenuP != '0');
@@ -142,18 +144,27 @@ int moduloLivros(void){
         opModulo_L = menuLivros();
         switch(opModulo_L){
             case '1':
-            cadastroLivros();
-            break;
+                cadastroLivros();
+                break;
+
             case '2':
-            moduloLivros_Pesq();
-            break;
+                moduloLivros_Pesq();
+                break;
+
             case '3':
-            moduloLivros_Atual();
-            break;
+                moduloLivros_Atual();
+                break;
+
             case '4':
-            moduloLivros_Exclu();
-            break;
-        }
+                moduloLivros_Exclu();
+                break;
+
+            case '0':
+                continue;
+
+            default:
+                validaMenu();
+            }
     }while (opModulo_L != '0');
     return 0;
 }
@@ -161,23 +172,22 @@ int moduloLivros(void){
 int moduloLivros_Pesq(void){
     char opModulo_L;
     do{
-        opModulo_L = pesquisaLivros();
+        opModulo_L = menu_pesqLivros();
         switch(opModulo_L){
             case '1':
-            pesquisaLivros_Titulo();
-            break;
+                pesquisaLivros_Titulo();
+                break;
+
             case '2':
-            pesquisaLivros_Autor();
-            break;
-            case '3':
-            pesquisaLivros_Genero();
-            break;
-            case '4':
-            pesquisaLivros_Codigo();
-            break;
-            case '5':
-            break;
-        }
+                pesquisaLivros_ISBN();
+                break;
+
+            case '0':
+            continue;
+
+            default:
+                validaMenu();
+            }
     }while (opModulo_L != '0');
     return 0;
 }
@@ -188,20 +198,19 @@ int moduloLivros_Atual(void){
         opModulo_L = atualizaLivros();
         switch(opModulo_L){
             case '1':
-            atualizaLivros_Titulo();
-            break;
+                atualizaLivros_Titulo();
+                break;
+
             case '2':
-            atualizaLivros_Autor();
-            break;
-            case '3':
-            atualizaLivros_Genero();
-            break;
-            case '4':
-            atualizaLivros_Codigo();
-            break;
-            case '5':
-            break;
-        }
+                atualizaLivros_Codigo();
+                break;
+                
+            case '0':
+                continue;
+
+            default:
+                validaMenu();
+            }
     }while (opModulo_L != '0');
     return 0;
 }
@@ -212,20 +221,15 @@ int moduloLivros_Exclu(void){
         opModulo_L = excluirLivros();
         switch(opModulo_L){
             case '1':
-            excluirLivros_Titulo();
-            break;
-            case '2':
-            excluirLivros_Autor();
-            break;
-            case '3':
-            excluirLivros_Genero();
-            break;
-            case '4':
-            excluirLivros_Codigo();
-            break;
-            case '5':
-            break;
-        }
+                excluirLivros_Codigo();
+                break;
+
+            case '0':
+                continue;
+
+            default:
+                validaMenu();
+            }
     }while (opModulo_L != '0');
     return 0;
 }
@@ -236,21 +240,27 @@ int moduloUsuarios(void){
         opModulo_U = menuUsuarios();
         switch(opModulo_U){
             case '1':
-            cadastroUsuarios();
-            break;
+                cadastroUsuarios();
+                break;
+
             case '2':
-            moduloUsuarios_Pesq();
-            break;
+                moduloUsuarios_Pesq();
+                break;
+
             case '3':
-            moduloUsuarios_Atual();
-            break;
+                moduloUsuarios_Atual();
+                break;
+
             case '4':
-            moduloUsuarios_Exclu();
-            break;
-            case '5':
-            main();
-            break;
-        }
+                moduloUsuarios_Exclu();
+                break;
+
+            case '0':
+                continue;
+
+            default:
+                validaMenu();
+            }
     }while (opModulo_U != '0');
     return 0;
 }
@@ -261,17 +271,23 @@ int moduloUsuarios_Pesq(void){
         opModulo_U = pesquisaUsuarios();
         switch(opModulo_U){
             case '1':
-            pesquisaUsuarios_Nome();
-            break;
+                pesquisaUsuarios_Nome();
+                break;
+
             case '2':
-            pesquisaUsuarios_Nasc();
-            break;
+                pesquisaUsuarios_Nasc();
+                break;
+
             case '3':
-            pesquisaUsuarios_Codigo();
-            break;
-            case '5':
-            break;
-        }
+                pesquisaUsuarios_Codigo();
+                break;
+
+            case '0':
+                continue;
+
+            default:
+                validaMenu();
+            }
     }while (opModulo_U != '0');
     return 0;
 }
@@ -282,17 +298,23 @@ int moduloUsuarios_Atual(void){
         opModulo_U = atualizaUsuarios();
         switch(opModulo_U){
             case '1':
-            atualizaUsuarios_Nome();
-            break;
+                atualizaUsuarios_Nome();
+                break;
+
             case '2':
-            pesquisaUsuarios_Nasc();
-            break;
+                pesquisaUsuarios_Nasc();
+                break;
+
             case '3':
-            pesquisaUsuarios_Codigo();
-            break;
-            case '5':
-            break;
-        }
+                pesquisaUsuarios_Codigo();
+                break;
+                
+            case '0':
+                continue;
+
+            default:
+                validaMenu();
+            }
     }while (opModulo_U != '0');
     return 0;
 }
@@ -303,17 +325,23 @@ int moduloUsuarios_Exclu(void){
         opModulo_U = excluirUsuarios();
         switch(opModulo_U){
             case '1':
-            excluirUsuarios_Nome();
-            break;
+                excluirUsuarios_Nome();
+                break;
+
             case '2':
-            excluirUsuarios_Nasc();
-            break;
+                excluirUsuarios_Nasc();
+                break;
+
             case '3':
-            excluirUsuarios_Codigo();
-            break;
-            case '5':
-            break;
-        }
+                excluirUsuarios_Codigo();
+                break;
+
+            case '0':
+                continue;
+            
+            default:
+                validaMenu();
+            }
     }while (opModulo_U != '0');
     return 0;
 }
@@ -324,21 +352,27 @@ int moduloEmprestimos(void){
         opModulo_E = menuEmprestimos();
         switch(opModulo_E){
             case '1':
-            efetuarEmprestimos();
-            break;
+                efetuarEmprestimos();
+                break;
+
             case '2':
-            moduloEmprestimos_Pesq();
-            break;
+                moduloEmprestimos_Pesq();
+                break;
+
             case '3':
-            moduloEmprestimos_Atual();
-            break;
+                moduloEmprestimos_Atual();
+                break;
+
             case '4':
-            moduloEmprestimos_Exclu();
-            break;
-            case '5':
-            main();
-            break;
-        }
+                moduloEmprestimos_Exclu();
+                break;
+
+            case '0':
+            continue;
+
+            default:
+                validaMenu();
+            }   
     }while (opModulo_E != '0');
     return 0;
 }
@@ -349,17 +383,23 @@ int moduloEmprestimos_Pesq(void){
         opModulo_E = pesquisaEmprestimos();
         switch(opModulo_E){
             case '1':
-            pesquisaEmprestimos_Nome();
-            break;
+                pesquisaEmprestimos_Nome();
+                break;
+
             case '2':
-            pesquisaEmprestimos_Livro();
-            break;
+                pesquisaEmprestimos_Livro();
+                break;
+
             case '3':
-            pesquisaEmprestimos_Data();
-            break;
-            case '5':
-            break;
-        }
+                pesquisaEmprestimos_Data();
+                break;
+
+            case '0':
+                continue;
+            
+            default:
+                validaMenu();
+            }
     }while (opModulo_E != '0');
     return 0;
 }
@@ -370,17 +410,23 @@ int moduloEmprestimos_Atual(void){
         opModulo_E = atualizaEmprestimos();
         switch(opModulo_E){
             case '1':
-            atualizaEmprestimos_Nome();
-            break;
+                atualizaEmprestimos_Nome();
+                break;
+
             case '2':
-            atualizaEmprestimos_Livro();
-            break;
+                atualizaEmprestimos_Livro();
+                break;
+
             case '3':
-            atualizaEmprestimos_Data();
-            break;
-            case '5':
-            break;
-        }
+                atualizaEmprestimos_Data();
+                break;
+
+            case '0':
+                continue;
+            
+            default:
+                validaMenu();
+            }
     }while (opModulo_E != '0');
     return 0;
 }
@@ -391,17 +437,23 @@ int moduloEmprestimos_Exclu(void){
         opModulo_E = finalizaEmprestimos();
         switch(opModulo_E){
             case '1':
-            finalizaEmprestimos_Nome();
-            break;
+                finalizaEmprestimos_Nome();
+                break;
+
             case '2':
-            finalizaEmprestimos_Livro();
-            break;
+                finalizaEmprestimos_Livro();
+                break;
+
             case '3':
-            finalizaEmprestimos_Data();
-            break;
-            case '5':
-            break;
-        }
+                finalizaEmprestimos_Data();
+                break;
+
+            case '0':
+                continue;
+            
+            default:
+                validaMenu();
+            }
     }while (opModulo_E != '0');
     return 0;
 }
@@ -412,15 +464,22 @@ int moduloRelatorios(void) {
         opModulo_R = menuRelatorios();
         switch(opModulo_R){
             case '1':
-            listaCadastros_Livros(livroTitulo, livroAutor, livroGenero, livroCodigo, n);
-            break;
+                listaCadastros_Livros(livroTitulo, livroAutor, livroGenero, livroCodigo, n);
+                break;
+
             case '2':
-            listaCadastros_Usuarios(nome, datanasc, usuarioCodigo, n);
-            break;
+                listaCadastros_Usuarios(nome, datanasc, usuarioCodigo, n);
+                break;
+
             case '3':
-            listaEmprestimos(nome, livroTitulo, dataemprestimo, n);
-            break;
-        }
+                listaEmprestimos(nome, livroTitulo, dataemprestimo, n);
+                break;
+            case '0':
+                continue;
+            
+            default:
+                validaMenu();
+            }
     }while (opModulo_R != '0');
     return 0;
 }

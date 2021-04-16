@@ -1,4 +1,17 @@
 // Módulo Empréstimos
+
+struct emprestimo {
+    char empr_CPF[51];
+    char empr_ISBN[14];
+    char empr_Data[11];
+    char status;
+};
+
+typedef struct emprestimo Emprestimo;
+
+void guardarEmprestimo(Emprestimo*);
+Emprestimo* tela_CadEmpr(Emprestimo*);
+
 char menuEmprestimos(void);
     void efetuarEmprestimos(void);
     char pesquisaEmprestimos(void);
