@@ -156,7 +156,7 @@ int moduloLivros(void){
                 break;
 
             case '4':
-                moduloLivros_Exclu();
+                excluirLivros();
                 break;
 
             case '0':
@@ -193,25 +193,6 @@ int moduloLivros_Pesq(void){
 }
 
 
-int moduloLivros_Exclu(void){
-    char opModulo_L;
-    do{
-        opModulo_L = excluirLivros();
-        switch(opModulo_L){
-            case '1':
-                excluirLivros_Codigo();
-                break;
-
-            case '0':
-                continue;
-
-            default:
-                validaMenu();
-            }
-    }while (opModulo_L != '0');
-    return 0;
-}
-
 int moduloUsuarios(void){
     char opModulo_U;
     do{
@@ -222,15 +203,15 @@ int moduloUsuarios(void){
                 break;
 
             case '2':
-                moduloUsuarios_Pesq();
+                pesquisaUsuarios();
                 break;
 
             case '3':
-                moduloUsuarios_Atual();
+                atualizaUsuarios();
                 break;
 
             case '4':
-                moduloUsuarios_Exclu();
+                excluirUsuarios();
                 break;
 
             case '0':
@@ -243,86 +224,6 @@ int moduloUsuarios(void){
     return 0;
 }
 
-int moduloUsuarios_Pesq(void){
-    char opModulo_U;
-    do{
-        opModulo_U = pesquisaUsuarios();
-        switch(opModulo_U){
-            case '1':
-                pesquisaUsuarios_Nome();
-                break;
-
-            case '2':
-                pesquisaUsuarios_Nasc();
-                break;
-
-            case '3':
-                pesquisaUsuarios_Codigo();
-                break;
-
-            case '0':
-                continue;
-
-            default:
-                validaMenu();
-            }
-    }while (opModulo_U != '0');
-    return 0;
-}
-
-int moduloUsuarios_Atual(void){
-    char opModulo_U;
-    do{
-        opModulo_U = atualizaUsuarios();
-        switch(opModulo_U){
-            case '1':
-                atualizaUsuarios_Nome();
-                break;
-
-            case '2':
-                pesquisaUsuarios_Nasc();
-                break;
-
-            case '3':
-                pesquisaUsuarios_Codigo();
-                break;
-                
-            case '0':
-                continue;
-
-            default:
-                validaMenu();
-            }
-    }while (opModulo_U != '0');
-    return 0;
-}
-
-int moduloUsuarios_Exclu(void){
-    char opModulo_U;
-    do{
-        opModulo_U = excluirUsuarios();
-        switch(opModulo_U){
-            case '1':
-                excluirUsuarios_Nome();
-                break;
-
-            case '2':
-                excluirUsuarios_Nasc();
-                break;
-
-            case '3':
-                excluirUsuarios_Codigo();
-                break;
-
-            case '0':
-                continue;
-            
-            default:
-                validaMenu();
-            }
-    }while (opModulo_U != '0');
-    return 0;
-}
 
 int moduloEmprestimos(void){
     char opModulo_E;

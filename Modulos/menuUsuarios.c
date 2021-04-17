@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "clearscr.h"
 #include "moduloValida.h"
 #include "telas.h"
@@ -108,377 +109,76 @@ Usuario* tela_CadUsuario(Usuario* user) {
 
 // Pesquisas
 
-char pesquisaUsuarios(void) {
-    char opMenu;
-        
-    clearscr();
-    printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                         Pesquisa de Usuários                            |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                     Deseja pesquisar por:                               |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                    |:| 1 - Nome do usuário                              |||\n");
-    printf("|||                    |:| 2 - Data de nascimento do usuário                |||\n");
-    printf("|||                    |:| 3 - Codigo do usuário                            |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-    printf("|||                             0 - Menu Anterior                           |||\n");
-    printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-    printf("\n");
-    printf("||| Escolha sua opção: ");
-    scanf("%[0-9]", &opMenu);
-    getchar();
-        
-
-    return opMenu;
-}
-
-char pesquisaUsuarios_Nome(void) {
+void pesquisaUsuarios(void) {
+    char* cpf;
     Usuario* user;
-    user = (Usuario*) malloc(sizeof(user->usuarioNome));
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                           Pesquisa de Usuários                          |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                      Pesquisa por nome:                                 |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                    |:| Nome do usuário:                                 |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        do{
-            scanf("%50[^\n]", user->usuarioNome);
-            getchar();
-        }while (!testaNome(user->usuarioNome));
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
-        getchar();
 
-       // return nomeUsuario;  
-}
+    cpf = insereCPF();
+    user = procuraUsuario(cpf);
 
-char pesquisaUsuarios_Nasc(void) {
-    char nascUsuario[11];
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                           Pesquisa de Usuários                          |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                      Pesquisa por data de nascimento:                   |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||      |:| Data de nascimento do usuário:                                 |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        scanf("%[^\n]", nascUsuario);
+    if (user == NULL) {
+        clearscr();
+        printf("||| Usuário não consta no banco de dados...");
         getchar();
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
-        getchar();
-
-       // return nascUsuario;  
-}
-
-int pesquisaUsuarios_Codigo(void) {
-    int codigoUsuario;
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                           Pesquisa de Usuários                          |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                     Pesquisa por código:                                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                  |:| Código do usuário:                                 |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        scanf("%i", &codigoUsuario);
-        getchar();
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
-        getchar();
-
-      //  return codigoUsuario;  
+    }else{
+        mcadastroUsuario(user);
+    }
+    free(cpf);
+    free(user);
 }
 
 // Atualizações
 
-char atualizaUsuarios(void) {
-    char opMenu;
-        
-    clearscr();
-    printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                      Atualizar cadastro de Usuários                     |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||     Deseja pesquisar o usuário a ser atualizado por:                    |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                    |:| 1 - Nome do usuário                              |||\n");
-    printf("|||                    |:| 2 - Data de nascimento do usuário                |||\n");
-    printf("|||                    |:| 3 - Codigo do usuário                            |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-    printf("|||                             0 - Menu Anterior                           |||\n");
-    printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-    printf("\n");
-    printf("||| Escolha sua opção: ");
-    scanf("%[0-9]", &opMenu);
-    getchar();
-        
+void atualizaUsuarios(void) {
+    Usuario* user;
+    char* cpf;
 
-    return opMenu;
+    cpf = insereCPF();
+    user = procuraUsuario(cpf);
+
+    if (user == NULL) {
+
+        clearscr();
+        printf("||| Usuario não consta no banco de dados...");
+        getchar();
+
+    }else{
+
+        user = tela_CadUsuario(user);
+        strcpy(user->usuarioCPF, cpf);
+        recadastrarUsuario(user);
+        free(user);
+
+    }
+    free(cpf);
 }
-
-char atualizaUsuarios_Nome(void) {
-    char nomeUsuario[51];
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                           Atualizar Usuários                            |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                     Pesquisa por nome:                                  |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                    |:| Nome do usuário:                                 |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        scanf("%[^\n]", nomeUsuario);
-        getchar();
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
-        getchar();
-
-      //  return nomeUsuario;  
-}
-
-char atualizaUsuarios_Nasc(void) {
-    char nascUsuario[11];
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                           Atualizar Usuários                            |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                  Pesquisa por data de nascimento:                       |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||      |:| Data de nascimento do usuário:                                 |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        scanf("%[^\n]", nascUsuario);
-        getchar();
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
-        getchar();
-
-      //  return nascUsuario;  
-}
-
-int atualizaUsuarios_Codigo(void) {
-    int codigoUsuario;
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                           Atualizar Usuários                            |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                     Pesquisa por código:                                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                  |:| Código do usuário:                                 |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        scanf("%i", &codigoUsuario);
-        getchar();
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
-        getchar();
-
-     //   return codigoUsuario;  
-}
-
 // Exclusões
 
-char excluirUsuarios(void) {
-    char opMenu;
-        
-    clearscr();
-    printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                      Excluir cadastro de Usuários                       |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||     Deseja pesquisar o usuário a ser excluido por:                      |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                    |:| 1 - Nome do usuário                              |||\n");
-    printf("|||                    |:| 2 - Data de nascimento do usuário                |||\n");
-    printf("|||                    |:| 3 - Codigo do usuário                            |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-    printf("|||                             0 - Menu Anterior                           |||\n");
-    printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-    printf("\n");
-    printf("||| Escolha sua opção: ");
-    scanf("%[0-9]", &opMenu);
-    getchar();
-        
+void excluirUsuarios(void) {
+    Usuario* user;
+    user = (Usuario*) malloc(sizeof(Usuario));
+	char* cpf;
 
-    return opMenu;
-}
+	cpf = insereCPF();
+	user = procuraUsuario(cpf);
 
-char excluirUsuarios_Nome(void) {
-    char nomeUsuario[51];
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                           Excluir Usuários                              |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                       Pesquisa por nome:                                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                    |:| Nome do usuário:                                 |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        scanf("%[^\n]", nomeUsuario);
-        getchar();
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
+	if (user == NULL) {
+
+    	clearscr();
+        printf("||| Usuário não consta no banco de dados...");
         getchar();
 
-      //  return nomeUsuario;  
-}
+  	}else{
 
-char excluirUsuarios_Nasc(void) {
-    char nascUsuario[51];
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                           Excluir Usuários                              |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||         Pesquisa por data de nascimento:                                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||      |:| Data de nascimento do usuário:                                 |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        scanf("%[^\n]", nascUsuario);
-        getchar();
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
+        user->status = '0';
+        recadastrarUsuario(user);
+        free(user);
+        clearscr();
+        printf("||| Usuário excluido com sucesso!");
         getchar();
 
-      //  return nascUsuario;  
-}
-
-int excluirUsuarios_Codigo(void) {
-    int codigoUsuario;
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                           Excluir Usuários                              |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                       Pesquisa por código:                              |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                  |:| Código do usuário:                                 |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        scanf("%i", &codigoUsuario);
-        getchar();
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
-        getchar();
-
-      //  return codigoUsuario;  
+	}
+	free(cpf);
 }
 
 
@@ -491,4 +191,52 @@ void guardarUsuario(Usuario* user) {
 	}
 	fwrite(user, sizeof(Usuario), 1, arq);
 	fclose(arq);
+}
+
+
+Usuario* procuraUsuario(char* cpf) {
+    Usuario* user;
+    FILE* arq;
+
+    user = (Usuario*) malloc(sizeof(Usuario));
+    arq = fopen("usuarios.dat", "rb");
+
+    if (arq == NULL) {
+        arq_msgErro();
+    }
+
+	while(fread(user, sizeof(Usuario), 1, arq)) {
+		if ((strcmp(user->usuarioCPF, cpf) == 0) && (user->status == '1')) {
+			fclose(arq);
+			return user;
+		}
+	}
+    
+	fclose(arq);
+	return NULL;
+}
+
+void recadastrarUsuario(Usuario* user) {
+	int existe;
+	FILE* arq;
+    
+	Usuario* userLido;
+    userLido = (Usuario*) malloc(sizeof(Usuario));
+	
+	arq = fopen("usuarios.dat", "r+b");
+	if (arq == NULL) {
+		arq_msgErro();
+	}
+
+	existe = 0;
+
+	while(fread(userLido, sizeof(Usuario), 1, arq) && !existe) {
+		if (strcmp(userLido->usuarioCPF, user->usuarioCPF) == 0) {
+			existe = 1;
+			fseek(arq, -1*sizeof(Usuario), SEEK_CUR);
+        	fwrite(user, sizeof(Usuario), 1, arq);
+		}
+	}
+	fclose(arq);
+	free(userLido);
 }

@@ -81,6 +81,9 @@ int testaCPF(char* codigo) {
       continue;
     }
     else {
+      printf("|||                    CPF  inválido!\n");
+      printf("|||                    Tente novamente!\n");
+      printf("|||                                         ");
       return 0;
     }
   }

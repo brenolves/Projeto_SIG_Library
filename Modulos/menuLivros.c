@@ -149,10 +149,12 @@ void pesquisaLivros_Titulo(void) {
     Livro* liv;
 
     titulo = insereTitulo();
-    liv = procuraLivro_ISBN(titulo);
+    liv = procuraLivro_Titulo(titulo);
 
     if (liv == NULL) {
+        clearscr();
         printf("||| Livro não consta no banco de dados...");
+        getchar();
     }else{
         mcadastroLivro(liv);
     }
@@ -168,7 +170,9 @@ void pesquisaLivros_ISBN(void) {
     liv = procuraLivro_ISBN(isbnLivro);
 
     if (liv == NULL) {
+        clearscr();
         printf("||| Livro não consta no banco de dados...");
+        getchar();
     }else{
         mcadastroLivro(liv);
     }
@@ -181,119 +185,67 @@ void pesquisaLivros_ISBN(void) {
 
 void atualizaLivros(void) {
     Livro* liv;
-    liv = (Livro*) malloc(sizeof(Livro));
     char* isbn;
 
     isbn = insereISBN();
     liv = procuraLivro_ISBN(isbn);
 
     if (liv == NULL) {
+
+        clearscr();
         printf("||| Livro não consta no banco de dados...");
+        getchar();
+
     }else{
+
         liv = tela_CadLivros(liv);
         strcpy(liv->livroISBN, isbn);
         recadastrarLivro(liv);
         free(liv);
+
     }
     free(isbn);
 }
 
 // Exclusões
 
-char excluirLivros(void) {
-    char opMenu;
-    clearscr();
-    printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                      Excluir cadastro de Livros                         |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||     Deseja pesquisar o livro a ser excluido por:                        |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                    |:| 1 - Título do livro                              |||\n");
-    printf("|||                    |:| 2 - Código do livro                              |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||                                                                         |||\n");
-    printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-    printf("|||                             0 - Menu Anterior                           |||\n");
-    printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-    printf("\n");
-    printf("||| Escolha sua opção: ");
-    scanf("%[0-9]", &opMenu);
-    getchar();
+void excluirLivros(void) {
+    Livro* liv;
+    liv = (Livro*) malloc(sizeof(Livro));
+	char* isbn;
 
-    return opMenu;
-}
+	isbn = insereISBN();
+	liv = procuraLivro_ISBN(isbn);
 
-char excluirLivros_Titulo(void) {
-    char tituloLivro[51];
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                           Excluir Livros                                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                       Pesquisa por título:                              |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                    |:| Título do livro:                                 |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        scanf("%[^\n]", tituloLivro);
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
+	if (liv == NULL) {
+
+    	clearscr();
+        printf("||| Livro não consta no banco de dados...");
         getchar();
 
-      //  return tituloLivro;  
-}
+  	}else{
 
-
-
-int excluirLivros_Codigo(void) {
-    int codigoLivro;
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                           Excluir Livros                                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                       Pesquisa por código:                              |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                    |:| ISBN do livro:                                   |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        scanf("%i", &codigoLivro);
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
+        liv->status = '0';
+        recadastrarLivro(liv);
+        free(liv);
+        clearscr();
+        printf("||| Livro excluido com sucesso!");
         getchar();
 
-      //  return codigoLivro;  
+	}
+	free(isbn);
 }
+
+
 
 void guardarLivro(Livro* liv) {
 	FILE* arq;
 
 	arq = fopen("livros.dat", "ab");
 	if (arq == NULL) {
+
 		arq_msgErro();
+
 	}
 	fwrite(liv, sizeof(Livro), 1, arq);
 	fclose(arq);
@@ -309,13 +261,17 @@ Livro* procuraLivro_Titulo(char* titulo) {
     arq = fopen("livros.dat", "rb");
 
     if (arq == NULL) {
+
         arq_msgErro();
+
     }
 
-	while(fread(arq, sizeof(Livro), 1, arq)) {
+	while(fread(liv, sizeof(Livro), 1, arq)) {
 		if ((strcmp(liv->livroTitulo, titulo) == 0) && (liv->status == '1')) {
+
 			fclose(arq);
 			return liv;
+
 		}
 	}
 
@@ -334,7 +290,7 @@ Livro* procuraLivro_ISBN(char* isbn) {
         arq_msgErro();
     }
 
-	while(fread(arq, sizeof(Livro), 1, arq)) {
+	while(fread(liv, sizeof(Livro), 1, arq)) {
 		if ((strcmp(liv->livroISBN, isbn) == 0) && (liv->status == '1')) {
 			fclose(arq);
 			return liv;
@@ -345,12 +301,13 @@ Livro* procuraLivro_ISBN(char* isbn) {
 	return NULL;
 }
 
-void recadastrarLivro(Livro* aln) {
+void recadastrarLivro(Livro* liv) {
 	int existe;
 	FILE* arq;
-	Livro* liv;
-
-	liv = (Livro*) malloc(sizeof(Livro));
+    
+	Livro* livLido;
+    livLido = (Livro*) malloc(sizeof(Livro));
+	
 	arq = fopen("livros.dat", "r+b");
 	if (arq == NULL) {
 		arq_msgErro();
@@ -358,14 +315,14 @@ void recadastrarLivro(Livro* aln) {
 
 	existe = 0;
 
-	while(fread(liv, sizeof(Livro), 1, arq) && !existe) {
-		if (strcmp(liv->livroISBN, aln->livroISBN) == 0) {
+	while(fread(livLido, sizeof(Livro), 1, arq) && !existe) {
+		if (strcmp(livLido->livroISBN, liv->livroISBN) == 0) {
 			existe = 1;
 			fseek(arq, -1*sizeof(Livro), SEEK_CUR);
-        	fwrite(aln, sizeof(Livro), 1, arq);
+        	fwrite(liv, sizeof(Livro), 1, arq);
 		}
 	}
 	fclose(arq);
-	free(liv);
+	free(livLido);
 }
 

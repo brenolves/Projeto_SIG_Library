@@ -26,8 +26,6 @@ char menuLivros(void);
 
     void atualizaLivros(void);
 
-    char excluirLivros(void);
-        char excluirLivros_Titulo(void);
-        char excluirLivros_Autor(void);
-        char excluirLivros_Genero(void);
-        int excluirLivros_Codigo(void);
+    void excluirLivros(void);
+
+

@@ -38,9 +38,40 @@ char* insereISBN(void) {
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        getchar();
 
         return isbnLivro;  
+}
+
+char* insereCPF(void) {
+    char* cpf;
+    cpf = (char*) malloc(12*sizeof(char));
+    clearscr();
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                     Pesquisa por CPF:                                   |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                  |:| CPF do usuário: ");
+
+        do{
+            scanf("%11[^\n]", cpf);
+            getchar();
+        }while(!testaCPF(cpf));
+        
+        printf("                                                                            |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("\n");
+
+        return cpf;  
 }
 
 
@@ -74,7 +105,6 @@ char* insereTitulo(void) {
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("\n");
-        getchar();
 
         return tituloLivro;  
 }
