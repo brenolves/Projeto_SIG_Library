@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <time.h>
 #include "clearscr.h"
 #include "moduloValida.h"
 #include "telas.h"
@@ -43,6 +45,8 @@ char menuEmprestimos(void) {
 
 void efetuarEmprestimos(void) {
     Emprestimo* empr;
+    Livro* liv;
+    Usuario* user;
     int tentar;
 
     // Checar se existe memória disponível.
@@ -54,11 +58,34 @@ void efetuarEmprestimos(void) {
     } while(tentar == 1);
 
     empr = tela_CadEmpr(empr);
+
+    liv = procuraLivro_ISBN(empr->empr_ISBN);
+    if (liv == NULL) {
+        clearscr();
+        printf("||| Livro não consta no banco de dados...");
+        getchar();
+    }else{
+        mcadastroLivro(liv);
+    }
+
+    user = procuraUsuario(empr->empr_CPF);
+    if (user == NULL) {
+        clearscr();
+        printf("||| Usuário não consta no banco de dados...");
+        getchar();
+    }else{
+        mcadastroUsuario(user);
+    }
+
     guardarEmprestimo(empr);
     free(empr);
+    free(liv);
+    free(user);
 }
 
 Emprestimo* tela_CadEmpr(Emprestimo* empr) {
+    time_t t = time(NULL);
+    struct tm data = *localtime(&t);
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -72,25 +99,22 @@ Emprestimo* tela_CadEmpr(Emprestimo* empr) {
         printf("|||                    |:| CPF do usuário: ");
 
         do {
-            scanf(" %50[^\n]", empr->empr_CPF);
+            scanf(" %11[^\n]", empr->empr_CPF);
             getchar();
-        }while (!testaCPF(empr->empr_CPF));
+        }while(!testaCPF(empr->empr_CPF));
         
         printf("                                                                            |||\n");
-        printf("|||                    |:| ISBN do livro: ");
+        printf("|||                    |:| ISBN do Emprestimo: ");
 
         do {
-            scanf(" %13[^\n]", empr->empr_ISBN);
+            scanf("%13[^\n]", empr->empr_ISBN);
             getchar(); 
         }while(!testaISBN(empr->empr_ISBN));
-        
-        printf("                                                                            |||\n");
-        printf("|||                    |:| Período de empréstimo(Data de vencimento): ");
-        
-        do {
-            scanf(" %10[^\n]", empr->empr_Data);
-            getchar();
-        }while (!testaDataNasc(empr->empr_Data));
+
+        empr->empr_Data[0] = data.tm_mday;
+        empr->empr_Data[1] = data.tm_mon + 1;
+        empr->empr_Data[2] = data.tm_year + 1900;
+
         printf("                                                                            |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -107,6 +131,42 @@ Emprestimo* tela_CadEmpr(Emprestimo* empr) {
 
 // Pesquisas
 
+void pesquisaEmpr_CPF(void) {
+    char* cpf;
+    Emprestimo* empr;
+
+    cpf = insereCPF();
+    empr = procuraEmprestimo_CPF(cpf);
+
+    if (empr == NULL) {
+        clearscr();
+        printf("||| Empréstimo não consta no banco de dados...");
+        getchar();
+    }else{
+        mcadastroEmprestimo(empr);
+    }
+    free(cpf);
+    free(empr);
+}
+
+void pesquisaEmpr_ISBN(void) {
+    char* isbn;
+    Emprestimo* empr;
+
+    isbn = insereISBN();
+    empr = procuraEmprestimo_ISBN(isbn);
+
+    if (empr == NULL) {
+        clearscr();
+        printf("||| Empréstimo não consta no banco de dados...");
+        getchar();
+    }else{
+        mcadastroEmprestimo(empr);
+    }
+    free(isbn);
+    free(empr);
+}
+
 char pesquisaEmprestimos(void) {
     char opMenu;
        
@@ -120,9 +180,8 @@ char pesquisaEmprestimos(void) {
     printf("|||                                                                         |||\n");
     printf("|||                     Deseja pesquisar por:                               |||\n");
     printf("|||                                                                         |||\n");
-    printf("|||                    |:| 1 - Nome do usuário                              |||\n");
-    printf("|||                    |:| 2 - Livros em empréstimos                        |||\n");
-    printf("|||                    |:| 3 - Período de empréstimo                        |||\n");
+    printf("|||                    |:| 1 - CPF do usuário                               |||\n");
+    printf("|||                    |:| 2 - ISBN do livro emprestado                     |||\n");
     printf("|||                                                                         |||\n");
     printf("|||                                                                         |||\n");
     printf("|||                                                                         |||\n");
@@ -139,94 +198,6 @@ char pesquisaEmprestimos(void) {
     return opMenu;
 }
 
-char pesquisaEmprestimos_Nome(void) {
-    char nomeUsuario[51];
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                           Pesquisa de Empréstimos                       |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                      Pesquisa por nome:                                 |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                    |:| Nome do usuário:                                 |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        scanf("%[^\n]", nomeUsuario);
-        getchar();
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
-        getchar();
-
-       // return nomeUsuario;  
-}
-
-char pesquisaEmprestimos_Livro(void) {
-    char tituloLivro[51];
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                           Pesquisa de Empréstimos                       |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                     Pesquisa por titulo:                                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                    |:| Título do livro:                                 |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        scanf("%[^\n]", tituloLivro);
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
-        getchar();
-
-       // return tituloLivro;  
-}
-
-char pesquisaEmprestimos_Data(void) {
-    char dataEmprestimo[11];
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                           Pesquisa de Empréstimos                       |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                      Pesquisa por data do empréstimo:                   |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                |:| Data do empréstimo:                                  |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        scanf("%[^\n]", dataEmprestimo);
-        getchar();
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
-        getchar();
-
-       // return dataEmprestimo;  
-}
 
 // Atualizações
 
@@ -244,7 +215,7 @@ char atualizaEmprestimos(void) {
     printf("|||     Deseja pesquisar o usuário a ser atualizado por:                    |||\n");
     printf("|||                                                                         |||\n");
     printf("|||                    |:| 1 - Nome do usuário                              |||\n");
-    printf("|||                    |:| 2 - Livros em empréstimos                        |||\n");
+    printf("|||                    |:| 2 - Emprestimos em empréstimos                        |||\n");
     printf("|||                    |:| 3 - Período de empréstimo                        |||\n");
     printf("|||                                                                         |||\n");
     printf("|||                                                                         |||\n");
@@ -292,64 +263,6 @@ char atualizaEmprestimos_Nome(void) {
       //  return nomeUsuario;  
 }
 
-char atualizaEmprestimos_Livro(void) {
-    char tituloLivro[51];
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                          Atualizar Empréstimos                          |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                     Pesquisa por titulo:                                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                    |:| Título do livro:                                 |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        scanf("%[^\n]", tituloLivro);
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
-        getchar();
-
-       // return tituloLivro;  
-}
-
-char atualizaEmprestimos_Data(void) {
-    char dataEmprestimo[11];
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                           Atualizar Empréstimos                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                      Pesquisa por data do empréstimo:                   |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||               |:| Data do empréstimo:                                   |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        scanf("%[^\n]", dataEmprestimo);
-        getchar();
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
-        getchar();
-
-       // return dataEmprestimo;  
-}
 
 // Exclusões
 
@@ -366,7 +279,7 @@ char finalizaEmprestimos(void) {
     printf("|||     Deseja pesquisar o empréstimo a ser efinalizado por:                |||\n");
     printf("|||                                                                         |||\n");
     printf("|||                    |:| 1 - Nome do usuário                              |||\n");
-    printf("|||                    |:| 2 - Livros em empréstimos                        |||\n");
+    printf("|||                    |:| 2 - Emprestimos em empréstimos                        |||\n");
     printf("|||                    |:| 3 - Período de empréstimo                        |||\n");
     printf("|||                                                                         |||\n");
     printf("|||                                                                         |||\n");
@@ -413,65 +326,6 @@ char finalizaEmprestimos_Nome(void) {
        // return nomeUsuario;  
 }
 
-char finalizaEmprestimos_Livro(void) {
-    char tituloLivro[51];
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                           Finalizar Empréstimos                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                     Pesquisa por titulo:                                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                    |:| Título do livro:                                 |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        scanf("%[^\n]", tituloLivro);
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
-        getchar();
-
-       // return tituloLivro;  
-}
-
-char finalizaEmprestimos_Data(void) {
-    char dataEmprestimo[11];
-    clearscr();
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                           Finalizar Empréstimos                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                      Pesquisa por data do empréstimo:                   |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                |:| Data do empréstimo:                                  |||\n");
-        printf("|||                                         ");
-        printf("                                                                            |||\n");
-        scanf("%[^\n]", dataEmprestimo);
-        getchar();
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||                                                                         |||\n");
-        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("\n");
-        getchar();
-
-       // return dataEmprestimo;  
-}
-
 
 void guardarEmprestimo(Emprestimo* empr) {
 	FILE* arq;
@@ -484,4 +338,56 @@ void guardarEmprestimo(Emprestimo* empr) {
 	}
 	fwrite(empr, sizeof(Emprestimo), 1, arq);
 	fclose(arq);
+}
+
+Emprestimo* procuraEmprestimo_CPF(char* cpf) {
+    Emprestimo* empr;
+    FILE* arq;
+
+    empr = (Emprestimo*) malloc(sizeof(Emprestimo));
+    arq = fopen("emprestimos.dat", "rb");
+
+    if (arq == NULL) {
+
+        arq_msgErro();
+
+    }
+
+	while(fread(empr, sizeof(Emprestimo), 1, arq)) {
+		if ((strcmp(empr->empr_CPF, cpf) == 0) && (empr->status == '1')) {
+
+			fclose(arq);
+			return empr;
+
+		}
+	}
+
+	fclose(arq);
+	return NULL;
+}
+
+Emprestimo* procuraEmprestimo_ISBN(char* isbn) {
+    Emprestimo* empr;
+    FILE* arq;
+
+    empr = (Emprestimo*) malloc(sizeof(Emprestimo));
+    arq = fopen("emprestimos.dat", "rb");
+
+    if (arq == NULL) {
+
+        arq_msgErro();
+
+    }
+
+	while(fread(empr, sizeof(Emprestimo), 1, arq)) {
+		if ((strcmp(empr->empr_ISBN, isbn) == 0) && (empr->status == '1')) {
+
+			fclose(arq);
+			return empr;
+
+		}
+	}
+
+	fclose(arq);
+	return NULL;
 }

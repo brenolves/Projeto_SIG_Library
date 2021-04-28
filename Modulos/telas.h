@@ -1,3 +1,4 @@
+#include <time.h>
 #include "menuLivros.h"
 #include "menuUsuarios.h"
 #include "menuEmprestimos.h"

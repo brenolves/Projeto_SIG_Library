@@ -78,12 +78,21 @@ Usuario* tela_CadUsuario(Usuario* user) {
         }while (!testaNome(user->usuarioNome));
 
         printf("                                                                            |||\n");
-        printf("|||                    |:| Data de nascimento do usuário(dd/mm/aaaa): ");
+        printf("|||                    |:| Data de nascimento do usuário: \n");
 
         do {
-            scanf(" %10[^\n]", user->usuarioDataNasc);
+            printf("|||                    |:| Dia: ");
+            scanf(" %d", &user->usuarioDataNasc[0]);
             getchar();
-        }while (!testaDataNasc(user->usuarioDataNasc));
+
+            printf("|||                    |:| Mês: ");
+            scanf(" %d", &user->usuarioDataNasc[1]);
+            getchar();
+
+            printf("|||                    |:| Ano: ");
+            scanf(" %d", &user->usuarioDataNasc[2]);
+            getchar();
+        }while (!testaData(user->usuarioDataNasc[0],user->usuarioDataNasc[1],user->usuarioDataNasc[2]));
 
         printf("                                                                            |||\n");
         printf("|||                    |:| CPF do usuário (Somente números): ");
@@ -92,6 +101,55 @@ Usuario* tela_CadUsuario(Usuario* user) {
             scanf(" %11[^\n]", user->usuarioCPF);
             getchar();
         }while (!testaCPF(user->usuarioCPF));
+
+        printf("                                                                            |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("\n");
+        user->status = '1';
+
+        mcadastroUsuario(user);
+
+        return user;
+}
+
+Usuario* tela_RecadUsuario(Usuario* user) {
+    clearscr();
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                          Cadastrar Usuarios                             |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                    |:| Nome do usuário: ");
+
+        do {
+            scanf(" %50[^\n]", user->usuarioNome);
+            getchar();
+        }while (!testaNome(user->usuarioNome));
+
+        printf("                                                                            |||\n");
+        printf("|||                    |:| Data de nascimento do usuário: \n");
+
+        do {
+            printf("|||                    |:| Dia: ");
+            scanf(" %d", &user->usuarioDataNasc[0]);
+            getchar();
+
+            printf("|||                    |:| Mês: ");
+            scanf(" %d", &user->usuarioDataNasc[1]);
+            getchar();
+
+            printf("|||                    |:| Ano: ");
+            scanf(" %d", &user->usuarioDataNasc[2]);
+            getchar();
+        }while (!testaData(user->usuarioDataNasc[0],user->usuarioDataNasc[1],user->usuarioDataNasc[2]));
 
         printf("                                                                            |||\n");
         printf("|||                                                                         |||\n");
@@ -143,8 +201,9 @@ void atualizaUsuarios(void) {
         getchar();
 
     }else{
-
-        user = tela_CadUsuario(user);
+        int op;
+        mcadastroUsuario(user);
+        user = tela_RecadUsuario(user);
         strcpy(user->usuarioCPF, cpf);
         recadastrarUsuario(user);
         free(user);

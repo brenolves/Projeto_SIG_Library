@@ -7,7 +7,7 @@ typedef struct livro Livro;
 struct livro {
     char livroTitulo[81];
     char livroAutor[51];
-    char livroGenero[21];
+    char livroGenero[31];
     char livroISBN[14];
     char status;
 };
@@ -15,6 +15,8 @@ struct livro {
 Livro* procuraLivro_Titulo(char*);
 Livro* procuraLivro_ISBN(char*);
 Livro* tela_CadLivros(Livro*);
+Livro* tela_RecadLivros(Livro*);
+
 void guardarLivro(Livro*);
 void recadastrarLivro(Livro*);
 

@@ -2,7 +2,7 @@
 
 struct usuario {
     char usuarioNome[51];
-    char usuarioDataNasc[11];
+    int usuarioDataNasc[3];
     char usuarioCPF[12];
     char status;
 };
@@ -12,7 +12,9 @@ typedef struct usuario Usuario;
 Usuario* procuraUsuario(char*);
 void guardarUsuario(Usuario*);
 Usuario* tela_CadUsuario(Usuario*);
+Usuario* tela_RecadUsuario(Usuario*);
 void recadastrarUsuario(Usuario*);
+
 
 
 

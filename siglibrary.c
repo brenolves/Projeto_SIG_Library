@@ -262,15 +262,11 @@ int moduloEmprestimos_Pesq(void){
         opModulo_E = pesquisaEmprestimos();
         switch(opModulo_E){
             case '1':
-                pesquisaEmprestimos_Nome();
+                pesquisaEmpr_CPF();
                 break;
 
             case '2':
-                pesquisaEmprestimos_Livro();
-                break;
-
-            case '3':
-                pesquisaEmprestimos_Data();
+                pesquisaEmpr_ISBN();
                 break;
 
             case '0':
@@ -292,14 +288,6 @@ int moduloEmprestimos_Atual(void){
                 atualizaEmprestimos_Nome();
                 break;
 
-            case '2':
-                atualizaEmprestimos_Livro();
-                break;
-
-            case '3':
-                atualizaEmprestimos_Data();
-                break;
-
             case '0':
                 continue;
             
@@ -317,14 +305,6 @@ int moduloEmprestimos_Exclu(void){
         switch(opModulo_E){
             case '1':
                 finalizaEmprestimos_Nome();
-                break;
-
-            case '2':
-                finalizaEmprestimos_Livro();
-                break;
-
-            case '3':
-                finalizaEmprestimos_Data();
                 break;
 
             case '0':

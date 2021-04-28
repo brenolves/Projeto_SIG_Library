@@ -89,7 +89,7 @@ Livro* tela_CadLivros(Livro* liv){
         printf("                                                                            |||\n");
         printf("|||                    |:| Gênero do livro: ");
 
-        scanf(" %20[^\n]", liv->livroGenero);
+        scanf(" %30[^\n]", liv->livroGenero);
         getchar();
 
         printf("                                                                            |||\n");
@@ -99,6 +99,51 @@ Livro* tela_CadLivros(Livro* liv){
             scanf(" %13[^\n]", liv->livroISBN);
             getchar();
         }while(!testaISBN(liv->livroISBN));
+
+        printf("                                                                            |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("\n");
+        liv->status = '1';
+
+        mcadastroLivro(liv);
+
+        return liv;
+}
+
+Livro* tela_RecadLivros(Livro* liv){
+    clearscr();
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                           Cadastro de Livros                            |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                    |:| Título do livro: ");
+
+        do {
+            scanf(" %80[^\n]", liv->livroTitulo);
+            getchar();
+        }while (!testaTitulo(liv->livroTitulo));
+
+        printf("                                                                            |||\n");                                               
+        printf("|||                    |:| Autor do livro:  ");
+
+        do {
+            scanf(" %50[^\n]", liv->livroAutor);
+            getchar();
+        }while (!testaNome(liv->livroAutor));
+
+        printf("                                                                            |||\n");
+        printf("|||                    |:| Gênero do livro: ");
+
+        scanf(" %30[^\n]", liv->livroGenero);
+        getchar();
 
         printf("                                                                            |||\n");
         printf("|||                                                                         |||\n");

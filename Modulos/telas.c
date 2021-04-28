@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "menuEmprestimos.h"
 #include "menuLivros.h"
 #include "menuUsuarios.h"
 #include "moduloValida.h"
 #include "clearscr.h"
+
+
 ////////////////////////////////////////
 // Telas
 
@@ -118,14 +121,14 @@ void mcadastroLivro (Livro* liv) {
         printf("|||                            Livro Cadastrado                             |||\n");
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                            \n");
-        printf("|||                    Título:%s                                               \n", liv->livroTitulo);
-        printf("|||                    Autor:%s                                                \n", liv->livroAutor);
-        printf("|||                    Gênero:%s                                               \n", liv->livroGenero);
-        printf("|||                    ISBN:%s                                                 \n", liv->livroISBN);
-        printf("|||                                                                            \n");
+        printf("|||                                                                         |||\n");
+        printf("                       Título: %s                                               \n", liv->livroTitulo);
+        printf("                        Autor: %s                                                \n", liv->livroAutor);
+        printf("                       Gênero: %s                                               \n", liv->livroGenero);
+        printf("                         ISBN: %s                                                 \n", liv->livroISBN);
+        printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("||| Pressione ENTER para voltar ao menu...\n");
+        printf("||| Pressione ENTER para continuar...\n");
         getchar();
 }
 
@@ -136,13 +139,13 @@ void mcadastroUsuario (Usuario* user) {
         printf("|||                            Usuário Cadastrado                           |||\n");
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("|||                                                                            \n");
-        printf("|||                    Nome:%s                                                 \n", user->usuarioNome);
-        printf("|||                    Data de nascimento:%s                                   \n", user->usuarioDataNasc);
-        printf("|||                    CPF:%s                                                  \n", user->usuarioCPF);
-        printf("|||                                                                            \n");
+        printf("|||                                                                         |||\n");
+        printf("                       Nome: %s                                                 \n", user->usuarioNome);
+        printf("                       Data de Nascimento: %02d/%02d/%d                         \n", user->usuarioDataNasc[0], user->usuarioDataNasc[1], user->usuarioDataNasc[2]);
+        printf("                       CPF: %s                                                  \n", user->usuarioCPF);
+        printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("||| Pressione ENTER para voltar ao menu...\n");
+        printf("||| Pressione ENTER para continuar...\n");
         getchar();
 }
 
@@ -154,12 +157,13 @@ void mcadastroEmprestimo (Emprestimo* empr) {
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
-        printf("|||                    CPF do usuário:%s                                    |||\n", empr->empr_CPF);
-        printf("|||                    ISBN do livro emprestado:%s                          |||\n", empr->empr_ISBN);
-        printf("|||                    Vencimento:%s                                        |||\n", empr->empr_Data);
+        printf("                       CPF do usuário:%s                                    \n", empr->empr_CPF);
+        printf("                       ISBN do livro emprestado:%s                          \n", empr->empr_ISBN);
+        printf("                       Data do Empréstimo: %02d/%02d/%d                     \n", empr->empr_Data[0], empr->empr_Data[1], empr->empr_Data[2]);
+        printf("                       Vencimento: %02d/%02d/%d                             \n", empr->empr_Data[0], empr->empr_Data[1] + 1, empr->empr_Data[2]);
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-        printf("||| Pressione ENTER para voltar ao menu...\n");
+        printf("||| Pressione ENTER para continuar...\n");
         getchar();
 }
 

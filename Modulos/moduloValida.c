@@ -9,11 +9,15 @@
 #include "menuEmprestimos.h"
 //////////////////////////////////////////////////////////////
 
-// Feito por @flgorgonio
+// Adaptado de @flgorgonio
 int testaData(int dd, int mm, int aa){
   int maiorDia;
-  if (aa < 0 || mm < 1 || mm > 12)
+  if (aa < 0 || mm < 1 || mm > 12) {
+    printf("|||                    Data inválida!\n");
+    printf("|||                    Tente novamente!\n");
+    printf("|||                                         \n");
     return 0;
+  }
   if (mm == 2) {
     if (bissexto(aa)){
         maiorDia = 29;
@@ -26,12 +30,15 @@ int testaData(int dd, int mm, int aa){
   } else
     maiorDia = 31;
 
-  if (dd < 1 || dd > maiorDia)
+  if (dd < 1 || dd > maiorDia){
+    printf("|||                    Data inválida!\n");
+    printf("|||                    Tente novamente!\n");
+    printf("|||                                         \n");
     return 0;
-
+  }
   return 1;
 }
-// Feito por @flgorgonio
+// Adaptado de @flgorgonio
 int bissexto(int aa) {
   if ((aa % 4 == 0) && (aa % 100 != 0)){
     return 1;
@@ -53,7 +60,7 @@ int testaNome(char nome[]) {
   if (strlen(nome) == 0) {
     printf("|||                    Nome inválido!\n");
     printf("|||                    Tente novamente!\n");
-    printf("|||                                         ");
+    printf("|||                                         \n");
     return 0;
   }
   for (int i = 0; i < strlen(nome); i++) {
@@ -64,7 +71,7 @@ int testaNome(char nome[]) {
     } else {
       printf("|||                    Nome inválido!\n");
       printf("|||                    Tente novamente!\n");
-      printf("|||                                         ");
+      printf("|||                                         \n");
       return 0;
    }
   } 
@@ -74,13 +81,14 @@ int testaNome(char nome[]) {
 int testaCPF(char* codigo) {
   int tam = strlen(codigo);
   for (int i = 0;i < tam; i++) {
-    if (codigo[i] >= 48 && codigo[i] <= 57) {
-      continue;
+    if (codigo[i] < '0' || codigo[i] > '9') {
+      printf("|||                    CPF  inválido!\n");
+      printf("|||                    Tente novamente!\n");
+      printf("|||                                         ");
+      return 0;
     }
-    else if (tam == 11){
-      continue;
-    }
-    else {
+
+    if (tam != 11){
       printf("|||                    CPF  inválido!\n");
       printf("|||                    Tente novamente!\n");
       printf("|||                                         ");
@@ -171,3 +179,4 @@ void validaMenu(void) {
   printf("Aperte ENTER para voltar para o menú.");
   getchar();
 }
+
