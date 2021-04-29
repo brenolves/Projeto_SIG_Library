@@ -14,6 +14,7 @@ Emprestimo* procuraEmprestimo_CPF(char*);
 Emprestimo* procuraEmprestimo_ISBN(char*);
 void guardarEmprestimo(Emprestimo*);
 Emprestimo* tela_CadEmpr(Emprestimo*);
+void recadastrarEmpr(Emprestimo*);
 
 
 char menuEmprestimos(void);
@@ -24,8 +25,7 @@ char menuEmprestimos(void);
         void pesquisaEmpr_ISBN(void);
         void pesquisaEmpr_CPF(void);
 
-    char atualizaEmprestimos(void);
-        char atualizaEmprestimos_Nome(void);
+    void atualizaEmprestimos(void);
 
-    char finalizaEmprestimos(void);
-        char finalizaEmprestimos_Nome(void);
+
+    void finalizaEmprestimos(void);

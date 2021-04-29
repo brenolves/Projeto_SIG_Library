@@ -201,7 +201,7 @@ void atualizaUsuarios(void) {
         getchar();
 
     }else{
-        int op;
+
         mcadastroUsuario(user);
         user = tela_RecadUsuario(user);
         strcpy(user->usuarioCPF, cpf);
@@ -240,6 +240,7 @@ void excluirUsuarios(void) {
 	free(cpf);
 }
 
+// Funções gerais de amplo propósito(Podem ser usadas em outros módulos)
 
 void guardarUsuario(Usuario* user) {
 	FILE* arq;

@@ -243,7 +243,7 @@ void atualizaLivros(void) {
 
     }else{
 
-        liv = tela_CadLivros(liv);
+        liv = tela_RecadLivros(liv);
         strcpy(liv->livroISBN, isbn);
         recadastrarLivro(liv);
         free(liv);

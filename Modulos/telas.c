@@ -132,6 +132,22 @@ void mcadastroLivro (Livro* liv) {
         getchar();
 }
 
+void mcadastroLivro_Empr (Livro* liv) {
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                            Livro Emprestado                             |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("                       Título: %s                                               \n", liv->livroTitulo);
+        printf("                        Autor: %s                                                \n", liv->livroAutor);
+        printf("                       Gênero: %s                                               \n", liv->livroGenero);
+        printf("                         ISBN: %s                                                 \n", liv->livroISBN);
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+}
+
 void mcadastroUsuario (Usuario* user) {
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
@@ -149,11 +165,28 @@ void mcadastroUsuario (Usuario* user) {
         getchar();
 }
 
+void mcadastroUsuario_Empr (Usuario* user) {
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                            Usuário Responsável                          |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("                       Nome: %s                                                 \n", user->usuarioNome);
+        printf("                       Data de Nascimento: %02d/%02d/%d                         \n", user->usuarioDataNasc[0], user->usuarioDataNasc[1], user->usuarioDataNasc[2]);
+        printf("                       CPF: %s                                                  \n", user->usuarioCPF);
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("||| Pressione ENTER para continuar...\n");
+        getchar();
+}
+
 void mcadastroEmprestimo (Emprestimo* empr) {
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
-        printf("|||                            Empréstimo Efetuado                          |||\n");
+        printf("|||                               Empréstimo                                |||\n");
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");

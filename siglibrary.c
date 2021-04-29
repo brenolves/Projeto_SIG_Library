@@ -239,11 +239,11 @@ int moduloEmprestimos(void){
                 break;
 
             case '3':
-                moduloEmprestimos_Atual();
+                atualizaEmprestimos();
                 break;
 
             case '4':
-                moduloEmprestimos_Exclu();
+                finalizaEmprestimos();
                 break;
 
             case '0':
@@ -279,43 +279,6 @@ int moduloEmprestimos_Pesq(void){
     return 0;
 }
 
-int moduloEmprestimos_Atual(void){
-    char opModulo_E;
-    do{
-        opModulo_E = atualizaEmprestimos();
-        switch(opModulo_E){
-            case '1':
-                atualizaEmprestimos_Nome();
-                break;
-
-            case '0':
-                continue;
-            
-            default:
-                validaMenu();
-            }
-    }while (opModulo_E != '0');
-    return 0;
-}
-
-int moduloEmprestimos_Exclu(void){
-    char opModulo_E;
-    do{
-        opModulo_E = finalizaEmprestimos();
-        switch(opModulo_E){
-            case '1':
-                finalizaEmprestimos_Nome();
-                break;
-
-            case '0':
-                continue;
-            
-            default:
-                validaMenu();
-            }
-    }while (opModulo_E != '0');
-    return 0;
-}
 
 int moduloRelatorios(void) {
     char opModulo_R;
