@@ -12,7 +12,7 @@
 // Adaptado de @flgorgonio
 int testaData(int dd, int mm, int aa){
   int maiorDia;
-  if (aa < 0 || mm < 1 || mm > 12) {
+  if (aa <= 0 || mm < 1 || mm > 12) {
     printf("|||                    Data inválida!\n");
     printf("|||                    Tente novamente!\n");
     printf("|||                                         \n");

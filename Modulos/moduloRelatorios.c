@@ -1,9 +1,15 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 #include "clearscr.h"
 #include "moduloValida.h"
+#include "telas.h"
 
 char menuRelatorios(void) {
     char opMenu;
+    time_t t = time(NULL);
+    struct tm data = *localtime(&t);
         
     clearscr();
     printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
@@ -15,10 +21,10 @@ char menuRelatorios(void) {
     printf("|||                                                                         |||\n");
     printf("|||                                                                         |||\n");
     printf("|||                                                                         |||\n");
-    printf("|||                    |#| 1 - Cadastro de Livros                           |||\n");
-    printf("|||                    |#| 2 - Cadastro de Usuários                         |||\n");
-    printf("|||                    |#| 3 - Empréstimos de Livros                        |||\n");
-    printf("|||                                                                         |||\n");
+    printf("|||                |#| 1 - Cadastro de Livros Neste Mês (%02d/%d)           |||\n", data.tm_mon + 1, data.tm_year + 1900);
+    printf("|||                |#| 2 - Cadastro de Usuários Neste Mês (%02d/%d)         |||\n", data.tm_mon + 1, data.tm_year + 1900);
+    printf("|||                |#| 3 - Empréstimos de Livros Neste Mês (%02d/%d)        |||\n", data.tm_mon + 1, data.tm_year + 1900);
+    printf("|||                |#| 4 - Empréstimos Vencidos                             |||\n");
     printf("|||                                                                         |||\n");
     printf("|||                                                                         |||\n");
     printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");

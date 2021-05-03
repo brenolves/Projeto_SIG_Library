@@ -70,39 +70,34 @@ Usuario* tela_CadUsuario(Usuario* user) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
-        printf("|||                    |:| Nome do usuário: ");
-
+        
         do {
+            printf("                    |:| Nome do usuário: ");
             scanf(" %50[^\n]", user->usuarioNome);
             getchar();
         }while (!testaNome(user->usuarioNome));
 
-        printf("                                                                            |||\n");
-        printf("|||                    |:| Data de nascimento do usuário: \n");
-
         do {
-            printf("|||                    |:| Dia: ");
+            printf("                    |:| Data de nascimento do usuário: \n");
+            printf("                    |:| Dia: ");
             scanf(" %d", &user->usuarioDataNasc[0]);
             getchar();
 
-            printf("|||                    |:| Mês: ");
+            printf("                    |:| Mês: ");
             scanf(" %d", &user->usuarioDataNasc[1]);
             getchar();
 
-            printf("|||                    |:| Ano: ");
+            printf("                    |:| Ano: ");
             scanf(" %d", &user->usuarioDataNasc[2]);
             getchar();
         }while (!testaData(user->usuarioDataNasc[0],user->usuarioDataNasc[1],user->usuarioDataNasc[2]));
 
-        printf("                                                                            |||\n");
-        printf("|||                    |:| CPF do usuário (Somente números): ");
-
         do{
+            printf("                    |:| CPF do usuário (Somente números): ");
             scanf(" %11[^\n]", user->usuarioCPF);
             getchar();
-        }while (!testaCPF(user->usuarioCPF));
+        }while ((!testaCPF(user->usuarioCPF)) || (!procuraCPF(user->usuarioCPF)));
 
-        printf("                                                                            |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -127,31 +122,28 @@ Usuario* tela_RecadUsuario(Usuario* user) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
-        printf("|||                    |:| Nome do usuário: ");
-
+        
         do {
+            printf("                    |:| Nome do usuário: ");
             scanf(" %50[^\n]", user->usuarioNome);
             getchar();
         }while (!testaNome(user->usuarioNome));
 
-        printf("                                                                            |||\n");
-        printf("|||                    |:| Data de nascimento do usuário: \n");
-
         do {
-            printf("|||                    |:| Dia: ");
+            printf("                    |:| Data de nascimento do usuário: \n");
+            printf("                    |:| Dia: ");
             scanf(" %d", &user->usuarioDataNasc[0]);
             getchar();
 
-            printf("|||                    |:| Mês: ");
+            printf("                    |:| Mês: ");
             scanf(" %d", &user->usuarioDataNasc[1]);
             getchar();
 
-            printf("|||                    |:| Ano: ");
+            printf("                    |:| Ano: ");
             scanf(" %d", &user->usuarioDataNasc[2]);
             getchar();
         }while (!testaData(user->usuarioDataNasc[0],user->usuarioDataNasc[1],user->usuarioDataNasc[2]));
 
-        printf("                                                                            |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -176,7 +168,7 @@ void pesquisaUsuarios(void) {
 
     if (user == NULL) {
         clearscr();
-        printf("||| Usuário não consta no banco de dados...");
+        printf("                    Usuário não consta no banco de dados...");
         getchar();
     }else{
         mcadastroUsuario(user);
@@ -197,7 +189,7 @@ void atualizaUsuarios(void) {
     if (user == NULL) {
 
         clearscr();
-        printf("||| Usuario não consta no banco de dados...");
+        printf("                    Usuario não consta no banco de dados...");
         getchar();
 
     }else{
@@ -224,7 +216,7 @@ void excluirUsuarios(void) {
 	if (user == NULL) {
 
     	clearscr();
-        printf("||| Usuário não consta no banco de dados...");
+        printf("                    Usuário não consta no banco de dados...");
         getchar();
 
   	}else{
@@ -233,7 +225,7 @@ void excluirUsuarios(void) {
         recadastrarUsuario(user);
         free(user);
         clearscr();
-        printf("||| Usuário excluido com sucesso!");
+        printf("                    Usuário excluido com sucesso!");
         getchar();
 
 	}
@@ -274,6 +266,30 @@ Usuario* procuraUsuario(char* cpf) {
     
 	fclose(arq);
 	return NULL;
+}
+
+int procuraCPF(char* cpf) {
+    Usuario* user;
+    FILE* arq;
+
+    user = (Usuario*) malloc(sizeof(Usuario));
+    arq = fopen("usuarios.dat", "rb");
+
+    if (arq == NULL) {
+        arq_msgErro();
+    }
+
+	while(fread(user, sizeof(Usuario), 1, arq)) {
+		if ((strcmp(user->usuarioCPF, cpf) == 0) && (user->status == '1')) {
+			fclose(arq);
+            printf("                    Já existe um cadastro com este CPF!\n");
+            printf("                    Insira outro CPF! \n");
+			return 0;
+		}
+	}
+    
+	fclose(arq);
+	return 1;
 }
 
 void recadastrarUsuario(Usuario* user) {

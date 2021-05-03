@@ -10,6 +10,7 @@ struct usuario {
 typedef struct usuario Usuario;
 
 Usuario* procuraUsuario(char*);
+int procuraCPF(char*);
 void guardarUsuario(Usuario*);
 Usuario* tela_CadUsuario(Usuario*);
 Usuario* tela_RecadUsuario(Usuario*);

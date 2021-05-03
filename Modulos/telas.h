@@ -7,11 +7,11 @@
 char* insereISBN(void);
 char* insereTitulo(void);
 char* insereCPF(void);
-void mcadastroLivro (Livro*);
-void mcadastroLivro_Empr (Livro*);
-void mcadastroUsuario_Empr (Usuario*);
-void mcadastroUsuario (Usuario*);
-void mcadastroEmprestimo (Emprestimo*);
+void mcadastroLivro (const Livro*);
+void mcadastroLivro_Empr (const Livro*);
+void mcadastroUsuario_Empr (const Usuario*);
+void mcadastroUsuario (const Usuario*);
+void mcadastroEmprestimo (const Emprestimo*);
 void arq_msgErro(void);
 
 

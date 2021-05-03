@@ -14,6 +14,7 @@ struct livro {
 
 Livro* procuraLivro_Titulo(char*);
 Livro* procuraLivro_ISBN(char*);
+int procuraISBN(char*);
 Livro* tela_CadLivros(Livro*);
 Livro* tela_RecadLivros(Livro*);
 

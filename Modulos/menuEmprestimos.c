@@ -110,10 +110,14 @@ Emprestimo* tela_CadEmpr(Emprestimo* empr) {
             scanf("%13[^\n]", empr->empr_ISBN);
             getchar(); 
         }while(!testaISBN(empr->empr_ISBN));
-
+        // Data do Empréstimo
         empr->empr_Data[0] = data.tm_mday;
         empr->empr_Data[1] = data.tm_mon + 1;
         empr->empr_Data[2] = data.tm_year + 1900;
+        // Data de Vencimento
+        empr->empr_DataVal[0] = data.tm_mday;
+        empr->empr_DataVal[1] = data.tm_mon + 2;
+        empr->empr_DataVal[2] = data.tm_year + 1900;
 
         printf("                                                                            |||\n");
         printf("|||                                                                         |||\n");

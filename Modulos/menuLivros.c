@@ -71,36 +71,32 @@ Livro* tela_CadLivros(Livro* liv){
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
-        printf("|||                    |:| Título do livro: ");
 
         do {
+            printf("                    |:| Título do livro: ");
             scanf(" %80[^\n]", liv->livroTitulo);
             getchar();
         }while (!testaTitulo(liv->livroTitulo));
 
-        printf("                                                                            |||\n");                                               
-        printf("|||                    |:| Autor do livro:  ");
-
         do {
+            printf("                    |:| Autor do livro:  ");
             scanf(" %50[^\n]", liv->livroAutor);
             getchar();
         }while (!testaNome(liv->livroAutor));
 
-        printf("                                                                            |||\n");
-        printf("|||                    |:| Gênero do livro: ");
+        printf("                    |:| Gênero do livro: ");
 
         scanf(" %30[^\n]", liv->livroGenero);
         getchar();
 
-        printf("                                                                            |||\n");
-        printf("|||                    |:| ISBN do livro: ");
+        
 
         do {
+            printf("                    |:| ISBN do livro: ");
             scanf(" %13[^\n]", liv->livroISBN);
             getchar();
-        }while(!testaISBN(liv->livroISBN));
+        }while((!testaISBN(liv->livroISBN)) || (!procuraISBN(liv->livroISBN)));
 
-        printf("                                                                            |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -124,28 +120,24 @@ Livro* tela_RecadLivros(Livro* liv){
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
-        printf("|||                    |:| Título do livro: ");
 
         do {
+            printf("                    |:| Título do livro: ");
             scanf(" %80[^\n]", liv->livroTitulo);
             getchar();
         }while (!testaTitulo(liv->livroTitulo));
 
-        printf("                                                                            |||\n");                                               
-        printf("|||                    |:| Autor do livro:  ");
-
         do {
+            printf("                    |:| Autor do livro:  ");
             scanf(" %50[^\n]", liv->livroAutor);
             getchar();
         }while (!testaNome(liv->livroAutor));
 
-        printf("                                                                            |||\n");
-        printf("|||                    |:| Gênero do livro: ");
+        printf("                    |:| Gênero do livro: ");
 
         scanf(" %30[^\n]", liv->livroGenero);
         getchar();
 
-        printf("                                                                            |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -198,7 +190,7 @@ void pesquisaLivros_Titulo(void) {
 
     if (liv == NULL) {
         clearscr();
-        printf("||| Livro não consta no banco de dados...");
+        printf("                    Livro não consta no banco de dados...");
         getchar();
     }else{
         mcadastroLivro(liv);
@@ -216,7 +208,7 @@ void pesquisaLivros_ISBN(void) {
 
     if (liv == NULL) {
         clearscr();
-        printf("||| Livro não consta no banco de dados...");
+        printf("                    Livro não consta no banco de dados...");
         getchar();
     }else{
         mcadastroLivro(liv);
@@ -238,7 +230,7 @@ void atualizaLivros(void) {
     if (liv == NULL) {
 
         clearscr();
-        printf("||| Livro não consta no banco de dados...");
+        printf("                    Livro não consta no banco de dados...");
         getchar();
 
     }else{
@@ -265,7 +257,7 @@ void excluirLivros(void) {
 	if (liv == NULL) {
 
     	clearscr();
-        printf("||| Livro não consta no banco de dados...");
+        printf("                    Livro não consta no banco de dados...");
         getchar();
 
   	}else{
@@ -274,7 +266,7 @@ void excluirLivros(void) {
         recadastrarLivro(liv);
         free(liv);
         clearscr();
-        printf("||| Livro excluido com sucesso!");
+        printf("                    Livro excluido com sucesso!");
         getchar();
 
 	}
@@ -344,6 +336,30 @@ Livro* procuraLivro_ISBN(char* isbn) {
     
 	fclose(arq);
 	return NULL;
+}
+
+int procuraISBN(char* isbn) {
+    Livro* liv;
+    FILE* arq;
+
+    liv = (Livro*) malloc(sizeof(Livro));
+    arq = fopen("livros.dat", "rb");
+
+    if (arq == NULL) {
+        arq_msgErro();
+    }
+
+	while(fread(liv, sizeof(Livro), 1, arq)) {
+		if ((strcmp(liv->livroISBN, isbn) == 0) && (liv->status == '1')) {
+			fclose(arq);
+            printf("                    Já existe um cadastro com este ISBN!\n");
+            printf("                    Insira outro ISBN! \n");
+			return 0;
+		}
+	}
+    
+	fclose(arq);
+	return 1;
 }
 
 void recadastrarLivro(Livro* liv) {
