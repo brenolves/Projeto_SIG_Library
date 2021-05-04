@@ -9,6 +9,8 @@ struct livro {
     char livroAutor[51];
     char livroGenero[31];
     char livroISBN[14];
+    int  livroDataCad[3];
+    int  livroHoraCad[3];
     char status;
 };
 

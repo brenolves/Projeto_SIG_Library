@@ -29,6 +29,7 @@ int moduloEmprestimos_Atual(void);
 int moduloEmprestimos_Exclu(void);
 // Módulo Relatórios
 int moduloRelatorios(void);
+int moduloRelatoriosCad(void);
 
 /////////////////////////////////////////////////
 
@@ -276,15 +277,34 @@ int moduloRelatorios(void) {
         opModulo_R = menuRelatorios();
         switch(opModulo_R){
             case '1':
-                //listaCadastros_Livros(livroTitulo, livroAutor, livroGenero, livroCodigo, n);
+                moduloRelatoriosCad();
                 break;
-
             case '2':
                 //listaCadastros_Usuarios(nome, datanasc, usuarioCodigo, n);
                 break;
+            case '0':
+                continue;
+            
+            default:
+                validaMenu();
+            }
+    }while (opModulo_R != '0');
+    return 0;
+}
 
+int moduloRelatoriosCad(void) {
+    char opModulo_R;
+    do{
+        opModulo_R = menuRelatoriosCad();
+        switch(opModulo_R){
+            case '1':
+                telaCadastros_Livros();
+                break;
+            case '2':
+                telaCadastros_Usuarios();
+                break;
             case '3':
-                //listaEmprestimos(nome, livroTitulo, dataemprestimo, n);
+                telaCadastros_Emprestimos();
                 break;
             case '0':
                 continue;

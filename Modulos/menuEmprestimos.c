@@ -65,6 +65,7 @@ void efetuarEmprestimos(void) {
         printf("||| Livro não consta no banco de dados...");
         getchar();
     }else{
+        liv->status = '2';
         mcadastroLivro_Empr(liv);
     }
 
@@ -96,17 +97,15 @@ Emprestimo* tela_CadEmpr(Emprestimo* empr) {
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
-        printf("|||                    |:| CPF do usuário: ");
 
         do {
+            printf("                    |:| CPF do usuário: ");
             scanf(" %11[^\n]", empr->empr_CPF);
             getchar();
         }while(!testaCPF(empr->empr_CPF));
-        
-        printf("                                                                            |||\n");
-        printf("|||                    |:| ISBN do Emprestimo: ");
 
         do {
+            printf("                    |:| ISBN do Emprestimo: ");
             scanf("%13[^\n]", empr->empr_ISBN);
             getchar(); 
         }while(!testaISBN(empr->empr_ISBN));
@@ -118,8 +117,11 @@ Emprestimo* tela_CadEmpr(Emprestimo* empr) {
         empr->empr_DataVal[0] = data.tm_mday;
         empr->empr_DataVal[1] = data.tm_mon + 2;
         empr->empr_DataVal[2] = data.tm_year + 1900;
-
-        printf("                                                                            |||\n");
+        // Hora do Empréstimo
+        empr->empr_Hora[0] = data.tm_hour;
+        empr->empr_Hora[1] = data.tm_min;
+        empr->empr_Hora[2] = data.tm_sec;
+        
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -329,6 +331,32 @@ Emprestimo* procuraEmprestimo_ISBN(char* isbn) {
 
 	fclose(arq);
 	return NULL;
+}
+
+int procuraCadEmpr_ISBN(char* isbn) {
+    Emprestimo* empr;
+    FILE* arq;
+
+    empr = (Emprestimo*) malloc(sizeof(Emprestimo));
+    arq = fopen("emprestimos.dat", "rb");
+
+    if (arq == NULL) {
+
+        arq_msgErro();
+
+    }
+
+	while(fread(empr, sizeof(Emprestimo), 1, arq)) {
+		if ((strcmp(empr->empr_ISBN, isbn) == 0) && (empr->status == '1')) {
+
+			fclose(arq);
+			return 1;
+
+		}
+	}
+
+	fclose(arq);
+	return 0;
 }
 
 void recadastrarEmpr(Emprestimo* empr) {

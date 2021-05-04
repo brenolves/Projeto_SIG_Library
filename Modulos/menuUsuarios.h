@@ -3,6 +3,8 @@
 struct usuario {
     char usuarioNome[51];
     int usuarioDataNasc[3];
+    int usuarioDataCad[3];
+    int usuarioHoraCad[3];
     char usuarioCPF[12];
     char status;
 };

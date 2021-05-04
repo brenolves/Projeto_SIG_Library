@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <string.h>
 #include "clearscr.h"
 #include "moduloValida.h"
@@ -60,6 +61,8 @@ void cadastroUsuarios(void) {
 }
 
 Usuario* tela_CadUsuario(Usuario* user) {
+    time_t t = time(NULL);
+    struct tm data = *localtime(&t);
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -98,6 +101,10 @@ Usuario* tela_CadUsuario(Usuario* user) {
             getchar();
         }while ((!testaCPF(user->usuarioCPF)) || (!procuraCPF(user->usuarioCPF)));
 
+        user->usuarioDataCad[0] = data.tm_mday;
+        user->usuarioDataCad[1] = data.tm_mon + 1;
+        user->usuarioDataCad[2] = data.tm_year + 1900;
+
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -112,6 +119,8 @@ Usuario* tela_CadUsuario(Usuario* user) {
 }
 
 Usuario* tela_RecadUsuario(Usuario* user) {
+    time_t t = time(NULL);
+    struct tm data = *localtime(&t);
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -143,6 +152,15 @@ Usuario* tela_RecadUsuario(Usuario* user) {
             scanf(" %d", &user->usuarioDataNasc[2]);
             getchar();
         }while (!testaData(user->usuarioDataNasc[0],user->usuarioDataNasc[1],user->usuarioDataNasc[2]));
+
+        user->usuarioDataCad[0] = data.tm_mday;
+        user->usuarioDataCad[1] = data.tm_mon + 1;
+        user->usuarioDataCad[2] = data.tm_year + 1900;
+
+        user->usuarioHoraCad[0] = data.tm_hour;
+        user->usuarioHoraCad[1] = data.tm_min;
+        user->usuarioHoraCad[2] = data.tm_sec;
+
 
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");

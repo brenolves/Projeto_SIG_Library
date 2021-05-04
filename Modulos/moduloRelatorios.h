@@ -1,4 +1,5 @@
 char menuRelatorios(void);
-void listaCadastros_Livros(char*, char*, char*, int, int);
-void listaCadastros_Usuarios(char *, char *, int , int);
-void listaEmprestimos(char *, char *, char *, int );
+char menuRelatoriosCad(void);
+void telaCadastros_Livros(void);
+void telaCadastros_Usuarios(void);
+void telaCadastros_Emprestimos(void);

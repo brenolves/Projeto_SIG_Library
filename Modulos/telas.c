@@ -122,10 +122,11 @@ void mcadastroLivro (const Livro* liv) {
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
-        printf("                       Título: %s                                               \n", liv->livroTitulo);
-        printf("                        Autor: %s                                                \n", liv->livroAutor);
-        printf("                       Gênero: %s                                               \n", liv->livroGenero);
-        printf("                         ISBN: %s                                                 \n", liv->livroISBN);
+        printf("                       Título: %s                                              \n", liv->livroTitulo);
+        printf("                        Autor: %s                                              \n", liv->livroAutor);
+        printf("                       Gênero: %s                                              \n", liv->livroGenero);
+        printf("                         ISBN: %s                                              \n", liv->livroISBN);
+        printf("             Data de Cadastro: %02d/%02d/%d                                    \n", liv->livroDataCad[0], liv->livroDataCad[1], liv->livroDataCad[2]);
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("||| Pressione ENTER para continuar...\n");
@@ -159,6 +160,7 @@ void mcadastroUsuario (const Usuario* user) {
         printf("                       Nome: %s                                                 \n", user->usuarioNome);
         printf("                       Data de Nascimento: %02d/%02d/%d                         \n", user->usuarioDataNasc[0], user->usuarioDataNasc[1], user->usuarioDataNasc[2]);
         printf("                       CPF: %s                                                  \n", user->usuarioCPF);
+        printf("                       Data de Cadastro: %02d/%02d/%d                           \n", user->usuarioDataCad[0], user->usuarioDataCad[1], user->usuarioDataCad[2]);
         printf("|||                                                                         |||\n");
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("||| Pressione ENTER para continuar...\n");

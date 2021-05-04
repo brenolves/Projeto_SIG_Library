@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "clearscr.h"
 #include "moduloValida.h"
 #include "telas.h"
@@ -61,6 +62,8 @@ void cadastroLivros() {
 }
 
 Livro* tela_CadLivros(Livro* liv){
+    time_t t = time(NULL);
+    struct tm data = *localtime(&t);
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -96,6 +99,14 @@ Livro* tela_CadLivros(Livro* liv){
             scanf(" %13[^\n]", liv->livroISBN);
             getchar();
         }while((!testaISBN(liv->livroISBN)) || (!procuraISBN(liv->livroISBN)));
+        liv->livroDataCad[0] = data.tm_mday;
+        liv->livroDataCad[1] = data.tm_mon + 1;
+        liv->livroDataCad[2] = data.tm_year + 1900;
+
+        liv->livroHoraCad[0] = data.tm_hour;
+        liv->livroHoraCad[1] = data.tm_min;
+        liv->livroHoraCad[2] = data.tm_sec;
+
 
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -110,6 +121,8 @@ Livro* tela_CadLivros(Livro* liv){
 }
 
 Livro* tela_RecadLivros(Livro* liv){
+    time_t t = time(NULL);
+    struct tm data = *localtime(&t);
     clearscr();
         printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
         printf("|||                                                                         |||\n");
@@ -137,6 +150,10 @@ Livro* tela_RecadLivros(Livro* liv){
 
         scanf(" %30[^\n]", liv->livroGenero);
         getchar();
+
+        liv->livroDataCad[0] = data.tm_mday;
+        liv->livroDataCad[1] = data.tm_mon + 1;
+        liv->livroDataCad[2] = data.tm_year + 1900;
 
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -304,7 +321,7 @@ Livro* procuraLivro_Titulo(char* titulo) {
     }
 
 	while(fread(liv, sizeof(Livro), 1, arq)) {
-		if ((strcmp(liv->livroTitulo, titulo) == 0) && (liv->status == '1')) {
+		if ((strcmp(liv->livroTitulo, titulo) == 0) && (liv->status != '0')) {
 
 			fclose(arq);
 			return liv;
@@ -328,7 +345,7 @@ Livro* procuraLivro_ISBN(char* isbn) {
     }
 
 	while(fread(liv, sizeof(Livro), 1, arq)) {
-		if ((strcmp(liv->livroISBN, isbn) == 0) && (liv->status == '1')) {
+		if ((strcmp(liv->livroISBN, isbn) == 0) && (liv->status != '0')) {
 			fclose(arq);
 			return liv;
 		}
@@ -350,7 +367,7 @@ int procuraISBN(char* isbn) {
     }
 
 	while(fread(liv, sizeof(Livro), 1, arq)) {
-		if ((strcmp(liv->livroISBN, isbn) == 0) && (liv->status == '1')) {
+		if ((strcmp(liv->livroISBN, isbn) == 0) && (liv->status != '0')) {
 			fclose(arq);
             printf("                    Já existe um cadastro com este ISBN!\n");
             printf("                    Insira outro ISBN! \n");
