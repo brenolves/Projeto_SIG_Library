@@ -65,7 +65,6 @@ void efetuarEmprestimos(void) {
         printf("||| Livro não consta no banco de dados...");
         getchar();
     }else{
-        liv->status = '2';
         mcadastroLivro_Empr(liv);
     }
 
@@ -102,13 +101,13 @@ Emprestimo* tela_CadEmpr(Emprestimo* empr) {
             printf("                    |:| CPF do usuário: ");
             scanf(" %11[^\n]", empr->empr_CPF);
             getchar();
-        }while(!testaCPF(empr->empr_CPF));
+        }while((!testaCPF(empr->empr_CPF)) || (procuraCPF(empr->empr_CPF)));
 
         do {
             printf("                    |:| ISBN do Emprestimo: ");
             scanf("%13[^\n]", empr->empr_ISBN);
             getchar(); 
-        }while(!testaISBN(empr->empr_ISBN));
+        }while((!testaISBN(empr->empr_ISBN)) || (!procuraISBN_E(empr->empr_ISBN)));
         // Data do Empréstimo
         empr->empr_Data[0] = data.tm_mday;
         empr->empr_Data[1] = data.tm_mon + 1;
@@ -236,6 +235,9 @@ void atualizaEmprestimos(void) {
 // Exclusões
 
 void finalizaEmprestimos(void) {
+    time_t t = time(NULL);
+    struct tm data = *localtime(&t);
+
     Emprestimo* empr;
     empr = (Emprestimo*) malloc(sizeof(Emprestimo));
 	char* isbn;
@@ -250,7 +252,14 @@ void finalizaEmprestimos(void) {
         getchar();
 
   	}else{
-        mcadastroEmprestimo(empr);
+        empr->empr_Data[0] = data.tm_mday;
+        empr->empr_Data[1] = data.tm_mon + 1;
+        empr->empr_Data[2] = data.tm_year + 1900;
+
+        empr->empr_Hora[0] = data.tm_hour;
+        empr->empr_Hora[1] = data.tm_min;
+        empr->empr_Hora[2] = data.tm_sec;
+
         empr->status = '0';
         recadastrarEmpr(empr);
         free(empr);
@@ -382,4 +391,30 @@ void recadastrarEmpr(Emprestimo* empr) {
 	}
 	fclose(arq);
 	free(emprLido);
+}
+
+int procuraISBN_E(char* isbn) {
+    Emprestimo* empr;
+    FILE* arq;
+
+    empr = (Emprestimo*) malloc(sizeof(Emprestimo));
+    arq = fopen("emprestimos.dat", "rb");
+
+    if (arq == NULL) {
+        arq_msgErro();
+    }
+
+	while(fread(empr, sizeof(Emprestimo), 1, arq)) {
+		if ((strcmp(empr->empr_ISBN, isbn) == 0) && (empr->status != '0')) {
+			fclose(arq);
+            free(empr);
+            printf("                    Já existe um cadastro com este ISBN!\n");
+            printf("                    Insira outro ISBN! \n");
+			return 0;
+		}
+	}
+    
+	fclose(arq);
+    free(empr);
+	return 1;
 }

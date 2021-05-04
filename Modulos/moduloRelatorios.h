@@ -1,5 +1,9 @@
 char menuRelatorios(void);
 char menuRelatoriosCad(void);
+char menuRelatoriosExc(void);
 void telaCadastros_Livros(void);
+void telaExclu_Livros(void);
 void telaCadastros_Usuarios(void);
+void telaExclu_Usuarios(void);
 void telaCadastros_Emprestimos(void);
+void telaExclu_Emprestimos(void);

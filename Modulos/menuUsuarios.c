@@ -105,6 +105,10 @@ Usuario* tela_CadUsuario(Usuario* user) {
         user->usuarioDataCad[1] = data.tm_mon + 1;
         user->usuarioDataCad[2] = data.tm_year + 1900;
 
+        user->usuarioHoraCad[0] = data.tm_hour;
+        user->usuarioHoraCad[1] = data.tm_min;
+        user->usuarioHoraCad[2] = data.tm_sec;
+
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -224,6 +228,9 @@ void atualizaUsuarios(void) {
 // Exclusões
 
 void excluirUsuarios(void) {
+    time_t t = time(NULL);
+    struct tm data = *localtime(&t);
+
     Usuario* user;
     user = (Usuario*) malloc(sizeof(Usuario));
 	char* cpf;
@@ -238,6 +245,13 @@ void excluirUsuarios(void) {
         getchar();
 
   	}else{
+        user->usuarioDataCad[0] = data.tm_mday;
+        user->usuarioDataCad[1] = data.tm_mon + 1;
+        user->usuarioDataCad[2] = data.tm_year + 1900;
+
+        user->usuarioHoraCad[0] = data.tm_hour;
+        user->usuarioHoraCad[1] = data.tm_min;
+        user->usuarioHoraCad[2] = data.tm_sec;
 
         user->status = '0';
         recadastrarUsuario(user);

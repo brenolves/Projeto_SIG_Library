@@ -98,7 +98,7 @@ Livro* tela_CadLivros(Livro* liv){
             printf("                    |:| ISBN do livro: ");
             scanf(" %13[^\n]", liv->livroISBN);
             getchar();
-        }while((!testaISBN(liv->livroISBN)) || (!procuraISBN(liv->livroISBN)));
+        }while((!testaISBN(liv->livroISBN)) || (!procuraISBN_L(liv->livroISBN)));
         liv->livroDataCad[0] = data.tm_mday;
         liv->livroDataCad[1] = data.tm_mon + 1;
         liv->livroDataCad[2] = data.tm_year + 1900;
@@ -264,6 +264,9 @@ void atualizaLivros(void) {
 // Exclusões
 
 void excluirLivros(void) {
+    time_t t = time(NULL);
+    struct tm data = *localtime(&t);
+
     Livro* liv;
     liv = (Livro*) malloc(sizeof(Livro));
 	char* isbn;
@@ -278,6 +281,13 @@ void excluirLivros(void) {
         getchar();
 
   	}else{
+        liv->livroDataCad[0] = data.tm_mday;
+        liv->livroDataCad[1] = data.tm_mon + 1;
+        liv->livroDataCad[2] = data.tm_year + 1900;
+
+        liv->livroHoraCad[0] = data.tm_hour;
+        liv->livroHoraCad[1] = data.tm_min;
+        liv->livroHoraCad[2] = data.tm_sec;
 
         liv->status = '0';
         recadastrarLivro(liv);
@@ -355,7 +365,7 @@ Livro* procuraLivro_ISBN(char* isbn) {
 	return NULL;
 }
 
-int procuraISBN(char* isbn) {
+int procuraISBN_L(char* isbn) {
     Livro* liv;
     FILE* arq;
 

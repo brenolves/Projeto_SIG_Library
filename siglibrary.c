@@ -30,6 +30,7 @@ int moduloEmprestimos_Exclu(void);
 // Módulo Relatórios
 int moduloRelatorios(void);
 int moduloRelatoriosCad(void);
+int moduloRelatoriosExc(void);
 
 /////////////////////////////////////////////////
 
@@ -280,7 +281,7 @@ int moduloRelatorios(void) {
                 moduloRelatoriosCad();
                 break;
             case '2':
-                //listaCadastros_Usuarios(nome, datanasc, usuarioCodigo, n);
+                moduloRelatoriosExc();
                 break;
             case '0':
                 continue;
@@ -305,6 +306,30 @@ int moduloRelatoriosCad(void) {
                 break;
             case '3':
                 telaCadastros_Emprestimos();
+                break;
+            case '0':
+                continue;
+            
+            default:
+                validaMenu();
+            }
+    }while (opModulo_R != '0');
+    return 0;
+}
+
+int moduloRelatoriosExc(void) {
+    char opModulo_R;
+    do{
+        opModulo_R = menuRelatoriosExc();
+        switch(opModulo_R){
+            case '1':
+                telaExclu_Livros();
+                break;
+            case '2':
+                telaExclu_Usuarios();
+                break;
+            case '3':
+                telaExclu_Emprestimos();
                 break;
             case '0':
                 continue;
