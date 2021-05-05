@@ -12,6 +12,7 @@ void imprimeRelatorio_CUM(void);
 void imprimeRelatorio_EUM(void);
 void imprimeRelatorio_CEM(void);
 void imprimeRelatorio_EEM(void);
+void imprimeRelatorio_EV(void);
 
 char menuRelatorios(void) {
     char opMenu;
@@ -28,9 +29,9 @@ char menuRelatorios(void) {
     printf("|||                                                                         |||\n");
     printf("|||                                                                         |||\n");
     printf("|||                                                                         |||\n");
-    printf("|||                |#| 1 - Cadastro e Empréstimos Neste Mês (%02d/%d)       |||\n", data.tm_mon + 1, data.tm_year + 1900);
+    printf("|||                |#| 1 - Cadastros e Empréstimos Neste Mês (%02d/%d)      |||\n", data.tm_mon + 1, data.tm_year + 1900);
     printf("|||                |#| 2 - Exclusões Neste Mês (%02d/%d)                    |||\n", data.tm_mon + 1, data.tm_year + 1900);
-    printf("|||                |#| 3 - Empréstimos Vencidos (Em Desenvolvimento)        |||\n");
+    printf("|||                |#| 3 - Empréstimos Vencidos                             |||\n");
     printf("|||                                                                         |||\n");
     printf("|||                                                                         |||\n");
     printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
@@ -169,6 +170,10 @@ void imprimeRelatorio_CLM(void) {
     liv = (Livro*) malloc(sizeof(Livro));
     arq = fopen("livros.dat", "rb");
 
+    if (arq == NULL) {
+        arq = fopen("livros.dat", "wb");
+    }
+
     while(fread(liv, sizeof(Livro), 1, arq)) {
         if((liv->livroDataCad[1] == data.tm_mon + 1) && (liv->livroDataCad[2] == data.tm_year + 1900) && (liv->status != '0')) {
             tam = strlen(liv->livroTitulo);
@@ -197,6 +202,10 @@ void imprimeRelatorio_ELM(void) {
 
     liv = (Livro*) malloc(sizeof(Livro));
     arq = fopen("livros.dat", "rb");
+
+    if (arq == NULL) {
+        arq = fopen("livros.dat", "wb");
+    }
 
     while(fread(liv, sizeof(Livro), 1, arq)) {
         if((liv->livroDataCad[1] == data.tm_mon + 1) && (liv->livroDataCad[2] == data.tm_year + 1900) && (liv->status == '0')) {
@@ -273,6 +282,10 @@ void imprimeRelatorio_CUM(void) {
     user = (Usuario*) malloc(sizeof(Usuario));
     arq = fopen("usuarios.dat", "rb");
 
+    if (arq == NULL) {
+        arq = fopen("usuarios.dat", "wb");
+    }
+
     while(fread(user, sizeof(Usuario), 1, arq)) {
         if((user->usuarioDataCad[1] == data.tm_mon + 1) && (user->usuarioDataCad[2] == data.tm_year + 1900) && (user->status != '0')) {
             tam = strlen(user->usuarioNome);
@@ -301,6 +314,10 @@ void imprimeRelatorio_EUM(void) {
 
     user = (Usuario*) malloc(sizeof(Usuario));
     arq = fopen("usuarios.dat", "rb");
+
+    if (arq == NULL) {
+        arq = fopen("usuarios.dat", "wb");
+    }
 
     while(fread(user, sizeof(Usuario), 1, arq)) {
         if((user->usuarioDataCad[1] == data.tm_mon + 1) && (user->usuarioDataCad[2] == data.tm_year + 1900) && (user->status == '0')) {
@@ -374,6 +391,10 @@ void imprimeRelatorio_CEM(void) {
     empr = (Emprestimo*) malloc(sizeof(Emprestimo));
     arq = fopen("emprestimos.dat", "rb");
 
+    if (arq == NULL) {
+        arq = fopen("emprestimos.dat", "wb");
+    }
+
     while(fread(empr, sizeof(Emprestimo), 1, arq)) {
         if((empr->empr_Data[1] == data.tm_mon + 1) && (empr->empr_Data[2] == data.tm_year + 1900) && (empr->status != '0')) {
 
@@ -395,10 +416,60 @@ void imprimeRelatorio_EEM(void) {
     empr = (Emprestimo*) malloc(sizeof(Emprestimo));
     arq = fopen("emprestimos.dat", "rb");
 
+    if (arq == NULL) {
+        arq = fopen("emprestimos.dat", "wb");
+    }
+
     while(fread(empr, sizeof(Emprestimo), 1, arq)) {
         if((empr->empr_Data[1] == data.tm_mon + 1) && (empr->empr_Data[2] == data.tm_year + 1900) && (empr->status == '0')) {
 
             printf("|||        %-11s         ||  %02d | %02d:%02d ||       %-13s        |||\n", empr->empr_CPF, empr->empr_Data[0], empr->empr_Hora[0], empr->empr_Hora[1], empr->empr_ISBN);
+        }
+    }
+
+    fclose(arq);
+    free(empr);
+}
+
+void telaEmpr_Vencidos(void) {
+    clearscr();
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||              =||=||=||=||=|| SIG-Library ||=||=||=||=||=                |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                     Relatório de Empréstimos Vencidos                   |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||                                                                         |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||      CPF do Responsável    || Válido Até  ||  ISBN do Livro Emprestado  |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("|||                            ||             ||                            |||\n");
+        imprimeRelatorio_EV();
+        printf("|||                            ||             ||                            |||\n");
+        printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+        printf("||| Pressione ENTER para continuar...\n");
+        getchar();
+}
+
+void imprimeRelatorio_EV(void) {
+    time_t t = time(NULL);
+    struct tm data = *localtime(&t);
+
+    FILE* arq;
+    Emprestimo* empr;
+
+    empr = (Emprestimo*) malloc(sizeof(Emprestimo));
+    arq = fopen("emprestimos.dat", "rb");
+
+    if (arq == NULL) {
+        arq = fopen("emprestimos.dat", "wb");
+    }
+
+    while(fread(empr, sizeof(Emprestimo), 1, arq)) {
+        if((((empr->empr_DataVal[0] < data.tm_mday) && (empr->empr_DataVal[1] <= data.tm_mon + 1)) || (empr->empr_DataVal[1] < data.tm_mon + 1)) && (empr->empr_DataVal[2] <= data.tm_year + 1900) && (empr->status != '0')) {
+
+            printf("|||        %-11s         ||  %02d/%02d/%d ||       %-13s        |||\n", empr->empr_CPF, empr->empr_DataVal[0], empr->empr_DataVal[1], empr->empr_DataVal[2], empr->empr_ISBN);
         }
     }
 

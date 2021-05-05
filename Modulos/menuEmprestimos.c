@@ -6,6 +6,7 @@
 #include "moduloValida.h"
 #include "telas.h"
 
+
 // Módulo Empréstimos
 
 
@@ -142,7 +143,6 @@ void pesquisaEmpr_CPF(void) {
 
     cpf = insereCPF();
     empr = procuraEmprestimo_CPF(cpf);
-
     if (empr == NULL) {
         clearscr();
         printf("||| Empréstimo não consta no banco de dados...");
@@ -220,7 +220,7 @@ void atualizaEmprestimos(void) {
         getchar();
 
     }else{
-
+        mcadastroEmprestimo(empr);
         empr = tela_CadEmpr(empr);
         strcpy(empr->empr_ISBN, isbn);
         recadastrarEmpr(empr);
@@ -252,6 +252,8 @@ void finalizaEmprestimos(void) {
         getchar();
 
   	}else{
+        mcadastroEmprestimo(empr);    
+
         empr->empr_Data[0] = data.tm_mday;
         empr->empr_Data[1] = data.tm_mon + 1;
         empr->empr_Data[2] = data.tm_year + 1900;
@@ -401,7 +403,7 @@ int procuraISBN_E(char* isbn) {
     arq = fopen("emprestimos.dat", "rb");
 
     if (arq == NULL) {
-        arq_msgErro();
+        arq = fopen("emprestimos.dat", "wb");
     }
 
 	while(fread(empr, sizeof(Emprestimo), 1, arq)) {
@@ -418,3 +420,4 @@ int procuraISBN_E(char* isbn) {
     free(empr);
 	return 1;
 }
+

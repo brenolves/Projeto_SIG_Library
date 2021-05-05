@@ -251,7 +251,7 @@ void atualizaLivros(void) {
         getchar();
 
     }else{
-
+        mcadastroLivro(liv);
         liv = tela_RecadLivros(liv);
         strcpy(liv->livroISBN, isbn);
         recadastrarLivro(liv);
@@ -281,6 +281,8 @@ void excluirLivros(void) {
         getchar();
 
   	}else{
+        mcadastroLivro(liv);
+
         liv->livroDataCad[0] = data.tm_mday;
         liv->livroDataCad[1] = data.tm_mon + 1;
         liv->livroDataCad[2] = data.tm_year + 1900;
@@ -373,7 +375,7 @@ int procuraISBN_L(char* isbn) {
     arq = fopen("livros.dat", "rb");
 
     if (arq == NULL) {
-        arq_msgErro();
+        arq = fopen("livros.dat", "wb");
     }
 
 	while(fread(liv, sizeof(Livro), 1, arq)) {

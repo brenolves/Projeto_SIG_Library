@@ -245,6 +245,8 @@ void excluirUsuarios(void) {
         getchar();
 
   	}else{
+        mcadastroUsuario(user);    
+
         user->usuarioDataCad[0] = data.tm_mday;
         user->usuarioDataCad[1] = data.tm_mon + 1;
         user->usuarioDataCad[2] = data.tm_year + 1900;
@@ -308,7 +310,7 @@ int procuraCPF(char* cpf) {
     arq = fopen("usuarios.dat", "rb");
 
     if (arq == NULL) {
-        arq_msgErro();
+        arq = fopen("usuarios.dat", "wb");
     }
 
 	while(fread(user, sizeof(Usuario), 1, arq)) {

@@ -119,8 +119,8 @@ void menuAbout(void) {
         printf("|||  Projeto criado no intuito de prover um melhor gerenciamento de         |||\n");
         printf("|||  bibliotecas, gerindo o cadastro de novos livros, empréstimos de livros,|||\n");
         printf("|||  e os usuários da biblioteca, podendo também navegar pelas datas de em- |||\n");
-        printf("|||  -préstimo, prazos de devolução, livros disponíveis e usuários          |||\n");
-        printf("|||  cadastrados.                                                           |||\n");
+        printf("|||  -préstimo, prazos de devolução, livros e usuários cadastrados.         |||\n");
+        printf("|||                                                                         |||\n");
         printf("|||                                                                         |||\n");
         printf("|||     Desenvolvido por @brenolves                                         |||\n");
         printf("|||                                                                         |||\n");
@@ -282,6 +282,9 @@ int moduloRelatorios(void) {
                 break;
             case '2':
                 moduloRelatoriosExc();
+                break;
+            case '3':
+                telaEmpr_Vencidos();
                 break;
             case '0':
                 continue;

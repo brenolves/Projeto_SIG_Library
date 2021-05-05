@@ -7,3 +7,4 @@ void telaCadastros_Usuarios(void);
 void telaExclu_Usuarios(void);
 void telaCadastros_Emprestimos(void);
 void telaExclu_Emprestimos(void);
+void telaEmpr_Vencidos(void);

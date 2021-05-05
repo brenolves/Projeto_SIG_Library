@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <time.h>
 #include "menuEmprestimos.h"
@@ -207,3 +208,5 @@ void arq_msgErro(void) {
     printf("||| Fechando programa...\n");
     exit(1);
 }
+
+

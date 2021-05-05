@@ -20,7 +20,6 @@ void guardarEmprestimo(Emprestimo*);
 Emprestimo* tela_CadEmpr(Emprestimo*);
 void recadastrarEmpr(Emprestimo*);
 
-
 char menuEmprestimos(void);
 
     void efetuarEmprestimos(void);
