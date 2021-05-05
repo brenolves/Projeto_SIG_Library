@@ -102,7 +102,7 @@ Emprestimo* tela_CadEmpr(Emprestimo* empr) {
             printf("                    |:| CPF do usuário: ");
             scanf(" %11[^\n]", empr->empr_CPF);
             getchar();
-        }while((!testaCPF(empr->empr_CPF)) || (procuraCPF(empr->empr_CPF)));
+        }while((!testaCPF(empr->empr_CPF)) || (!procuraCPF_E(empr->empr_CPF)));
 
         do {
             printf("                    |:| ISBN do Emprestimo: ");
@@ -419,5 +419,30 @@ int procuraISBN_E(char* isbn) {
 	fclose(arq);
     free(empr);
 	return 1;
+}
+
+int procuraCPF_E(char* cpf) {
+    Usuario* user;
+    FILE* arq;
+
+    user = (Usuario*) malloc(sizeof(Usuario));
+    arq = fopen("usuarios.dat", "rb");
+
+    if (arq == NULL) {
+        arq = fopen("usuarios.dat", "wb");
+    }
+
+	while(fread(user, sizeof(Usuario), 1, arq)) {
+		if ((strcmp(user->usuarioCPF, cpf) == 0) && (user->status == '1')) {
+			fclose(arq);
+            
+			return 1;
+		}
+	}
+    
+	fclose(arq);
+    printf("                    Já existe um cadastro com este CPF!\n");
+    printf("                    Insira outro CPF! \n");
+	return 0;
 }
 

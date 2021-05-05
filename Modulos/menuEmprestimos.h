@@ -19,6 +19,7 @@ int procuraISBN_E(char*);
 void guardarEmprestimo(Emprestimo*);
 Emprestimo* tela_CadEmpr(Emprestimo*);
 void recadastrarEmpr(Emprestimo*);
+int procuraCPF_E(char*);
 
 char menuEmprestimos(void);
 
